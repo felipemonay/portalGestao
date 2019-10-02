@@ -1,0 +1,10 @@
+<div (click)="selectFile()" class="file-input">
+  <div *ngIf="fileCurrent.name" class="preview" [ngStyle]="{'background-image': 'url(' + fileCurrent.base64Data + ')'}"></div>
+  <div class="fileContent">
+    <span *ngIf="!fileCurrent.name">{{label}}</span>
+    <div style="max-width: 100px">
+    <span style="text-align: -webkit-center;" *ngIf="fileCurrent.name">Arquivo: <strong>{{ fileCurrent.name }}</strong></span>
+    </div>
+    <input #fileinput type="file" class="upload" accept="application/pdf,image/*" (change)="handleFileSelect($event)" style="display: none" />
+  </div>
+</div>

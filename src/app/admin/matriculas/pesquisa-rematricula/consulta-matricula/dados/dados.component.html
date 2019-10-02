@@ -1,0 +1,344 @@
+<div class="modal-header" style="text-align: center;">
+  <h5 class="modal-title py-2"><b>Dados cadastrais</b></h5>
+  <button type="button" class="close py-2" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <label aria-hidden="true">&times;</label>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="nav-tabs-custom mt-4">
+    <ul class="nav nav-tabs" style="text-align: center;">
+      <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Aluno</a></li>
+      <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Filiação</a></li>
+      <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Responsável<br>Financeiro</a></li>
+      <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Responsável<br>Pedagógico</a></li>
+      <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Ficha Saúde</a></li>
+      <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">Ficha Saida</a></li>
+      <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">Documentos</a></li>
+      <li class=""><a href="#tab_8" data-toggle="tab" aria-expanded="false">Plano de<br>Pagamento</a></li>
+    </ul>
+    <div style="overflow-y: hidden; height: calc(100vh - 25rem);">
+      <div class="px-2" style="overflow-y: auto; height: 100%;">
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab_1" *ngIf="(alunos$ | async) as aluno">
+            <div class="col-sm-12" style="padding-top:10px">  
+              <!-- <app-aluno [idMatricula]='aluno.idMatricula'></app-aluno> -->
+              <!-- <label>Nome do aluno:</label> {{ aluno.aluno.Basicos.nome }} <br>
+              <label>Data de nascimento:</label> {{ aluno.aluno.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+              <label>Identidade de gênero:</label> {{ aluno.aluno.Basicos.sexo }} <br>
+              <label>Nacionalidade:</label> {{ aluno.aluno.Basicos.nacionalidade }} <br>
+              <label>E-mail:</label> {{ aluno.aluno.Basicos.email }} <br>
+              <label>Telefone residencial:</label> {{ (!aluno.aluno.Basicos.telefonefixo) ? 'Não informado' : aluno.aluno.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+              <label>Telefone celular:</label> {{ (!aluno.aluno.Basicos.telefonecelular) ? 'Não informado' : aluno.aluno.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+              <label>CPF:</label> {{ aluno.aluno.Documento.cpf | mask: '000.000.000-00' }} <br>
+              <label>RG:</label> {{ aluno.aluno.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{aluno.aluno.Documento.rgEmissor}} <br>
+              <label class="mt-3"><h4 class="bordabaixo"><b>Endereço:</b></h4></label><br>
+              <label>CEP:</label> {{ aluno.aluno.Endereco.cep | mask: '00000-000' }} <br>
+              <label>Logradouro:</label> {{ aluno.aluno.Endereco.logradouro }} <br>
+              <label>Número:</label> {{ aluno.aluno.Endereco.numero }} <br>
+              <label *ngIf="aluno.aluno.Endereco.complemento">Complemento:</label> {{ aluno.aluno.Endereco.complemento }} <br>
+              <label>Bairro:</label> {{ aluno.aluno.Endereco.bairro }} <br>
+              <label>UF:</label> {{ aluno.aluno.Endereco.uf }} <br>
+              <label>Cidade:</label> {{ aluno.aluno.Endereco.cidade }} <br> -->
+
+              <ngb-accordion [closeOthers]="true">
+                  <ngb-panel id="static-1" title="Dados Cadastrais">
+                    <ng-template ngbPanelContent>
+                        <label>Nome do aluno:</label> {{ aluno.aluno.Basicos.nome }} <br>
+                        <label>Data de nascimento:</label> {{ aluno.aluno.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+                        <label>Identidade de gênero:</label> {{ aluno.aluno.Basicos.sexo }} <br>
+                        <label>Nacionalidade:</label> {{ aluno.aluno.Basicos.nacionalidade }} <br>
+                        <label>E-mail:</label> {{ (!aluno.aluno.Basicos.email) ? 'Não informado' : aluno.aluno.Basicos.email }} <br>
+                        <label>Telefone residencial:</label> {{ (!aluno.aluno.Basicos.telefonefixo) ? 'Não informado' : aluno.aluno.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+                        <label>Telefone celular:</label> {{ (!aluno.aluno.Basicos.telefonecelular) ? 'Não informado' : aluno.aluno.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+                        <label>CPF:</label> {{ aluno.aluno.Documento.cpf | mask: '000.000.000-00' }} <br>
+                        <label>RG:</label> {{ aluno.aluno.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{aluno.aluno.Documento.rgEmissor}} <br>
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="static-2" title="Endereço">
+                    <ng-template ngbPanelContent>
+                      <label>CEP:</label> {{ aluno.aluno.Endereco.cep | mask: '00000-000' }} <br>
+                      <label>Logradouro:</label> {{ aluno.aluno.Endereco.logradouro }} <br>
+                      <label>Número:</label> {{ aluno.aluno.Endereco.numero }} <br>
+                      <label *ngIf="aluno.aluno.Endereco.complemento">Complemento:</label> {{ aluno.aluno.Endereco.complemento }} <br>
+                      <label>Bairro:</label> {{ aluno.aluno.Endereco.bairro }} <br>
+                      <label>UF:</label> {{ aluno.aluno.Endereco.uf }} <br>
+                      <label>Cidade:</label> {{ aluno.aluno.Endereco.cidade }} <br>
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="static-3" title="Matricula">
+                    <ng-template ngbPanelContent>
+                      Pegar dados da matricula, vindo apenas ID.
+                    </ng-template>
+                  </ngb-panel>
+                </ngb-accordion>
+
+                <ngb-tabset>
+                    <ngb-tab title="Dados Cadastrais">
+                      <ng-template ngbTabContent>
+                          <label>Nome do aluno:</label> {{ aluno.aluno.Basicos.nome }} <br>
+                          <label>Data de nascimento:</label> {{ aluno.aluno.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+                          <label>Identidade de gênero:</label> {{ aluno.aluno.Basicos.sexo }} <br>
+                          <label>Nacionalidade:</label> {{ aluno.aluno.Basicos.nacionalidade }} <br>
+                          <label>E-mail:</label> {{ (!aluno.aluno.Basicos.email) ? 'Não informado' : aluno.aluno.Basicos.email }} <br>
+                          <label>Telefone residencial:</label> {{ (!aluno.aluno.Basicos.telefonefixo) ? 'Não informado' : aluno.aluno.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+                          <label>Telefone celular:</label> {{ (!aluno.aluno.Basicos.telefonecelular) ? 'Não informado' : aluno.aluno.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+                          <label>CPF:</label> {{ aluno.aluno.Documento.cpf | mask: '000.000.000-00' }} <br>
+                          <label>RG:</label> {{ aluno.aluno.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{aluno.aluno.Documento.rgEmissor}} <br>
+                      </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Endereço">
+                      <ng-template ngbTabContent>
+                          <label>CEP:</label> {{ aluno.aluno.Endereco.cep | mask: '00000-000' }} <br>
+                          <label>Logradouro:</label> {{ aluno.aluno.Endereco.logradouro }} <br>
+                          <label>Número:</label> {{ aluno.aluno.Endereco.numero }} <br>
+                          <label *ngIf="aluno.aluno.Endereco.complemento">Complemento:</label> {{ aluno.aluno.Endereco.complemento }} <br *ngIf="aluno.aluno.Endereco.complemento">
+                          <label>Bairro:</label> {{ aluno.aluno.Endereco.bairro }} <br>
+                          <label>UF:</label> {{ aluno.aluno.Endereco.uf }} <br>
+                          <label>Cidade:</label> {{ aluno.aluno.Endereco.cidade }} <br>
+                      </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Matrícula" >
+                      <ng-template ngbTabContent>
+                          Pegar dados da matricula, vindo apenas ID.
+                      </ng-template>
+                    </ngb-tab>
+                  </ngb-tabset>
+            </div>
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_2" *ngIf="(filiacao$ | async) as filiacao">
+            <!-- <div class="col-sm-6">  
+              <div class="bordabaixo centralizado mb-3"><label><h4 class="noMargin"><b>Filiação 1</b></h4></label></div>
+              <label>Nome:</label> {{ filiacao.pessoa.mae.Basicos.nome }} <br>
+              <label>Data de nascimento:</label> {{ filiacao.pessoa.mae.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+              <label>Identidade de gênero:</label> {{ filiacao.pessoa.mae.Basicos.sexo }} <br>
+              <label>Nacionalidade:</label> {{ filiacao.pessoa.mae.Basicos.nacionalidade }} <br>
+              <label>E-mail:</label> {{ filiacao.pessoa.mae.Basicos.email }} <br>
+              <label>Telefone residencial:</label> {{ (filiacao.pessoa.mae.Basicos.telefonefixo) ? 'Não informado' : filiacao.pessoa.mae.Basicos.telefonefixo | mask: 'AA(00)0000-0000'  }} <br>
+              <label>Telefone celular:</label> {{ (filiacao.pessoa.mae.Basicos.telefonecelular) ? 'Nao informado' : filiacao.pessoa.mae.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+              <label>CPF:</label> {{ filiacao.pessoa.mae.Documento.cpf | mask: '000.000.000-00' }} <br>
+              <label>RG:</label> {{ filiacao.pessoa.mae.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{ filiacao.pessoa.mae.Documento.rgEmissor }} <br>
+              <label>Responsável Financeiro:</label> {{ (filiacao.pessoa.mae.Responsavel && filiacao.pessoa.mae.Responsavel.financeiro) ? 'Sim' : 'Não' }}<br>
+              <label>Responsável Pedagógico:</label> {{ (filiacao.pessoa.mae.Responsavel && filiacao.pessoa.mae.Responsavel.pedagogico) ? 'Sim' : 'Não' }}<br>
+              <label class="mt-2"><h4 class="bordabaixo"><b>Endereço</b></h4></label><br>
+              <label>CEP:</label> {{ filiacao.pessoa.mae.Endereco.cep | mask: '00000-000' }} <br>
+              <label>Logradouro:</label> {{ filiacao.pessoa.mae.Endereco.logradouro }} <br>
+              <label>Número:</label> {{ filiacao.pessoa.mae.Endereco.numero }} <br>
+              <label *ngIf="filiacao.pessoa.mae.Endereco.complemento">Complemento:</label> {{ filiacao.pessoa.mae.Endereco.complemento }} <br *ngIf="filiacao.pessoa.mae.Endereco.complemento">
+              <label>Bairro:</label> {{ filiacao.pessoa.mae.Endereco.bairro }} <br>
+              <label>UF:</label> {{ filiacao.pessoa.mae.Endereco.uf }} <br>
+              <label>Cidade:</label> {{ filiacao.pessoa.mae.Endereco.cidade }} <br>
+            </div>
+            <div class="col-sm-6" *ngIf="filiacao.pessoa.pai">
+                <div class=" bordabaixo centralizado mb-3"><label><h4 class="noMargin"><b>Filiação 2</b></h4></label></div>
+                <label>Nome:</label> {{ filiacao.pessoa.pai.Basicos.nome }} <br>
+                <label>Data de nascimento:</label> {{ filiacao.pessoa.pai.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+                <label>Identidade de gênero:</label> {{ filiacao.pessoa.pai.Basicos.sexo }} <br>
+                <label>Nacionalidade:</label> {{ filiacao.pessoa.pai.Basicos.nacionalidade }} <br>
+                <label>E-mail:</label> {{ filiacao.pessoa.pai.Basicos.email }} <br>
+                <label>Telefone residencial:</label> {{ (!filiacao.pessoa.pai.Basicos.telefonefixo) ? 'Não informado' : filiacao.pessoa.pai.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+                <label>Telefone celular:</label> {{ (!filiacao.pessoa.pai.Basicos.telefonecelular) ? 'Não informado' : filiacao.pessoa.pai.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+                <label>CPF:</label> {{ filiacao.pessoa.pai.Documento.cpf | mask: '000.000.000-00' }} <br>
+                <label>RG:</label> {{ filiacao.pessoa.pai.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{ filiacao.pessoa.pai.Documento.rgEmissor }} <br>
+                <label>Responsável Financeiro:</label> {{ (filiacao.pessoa.pai.Responsavel && filiacao.pessoa.pai.Responsavel.financeiro) ? 'Sim' : 'Não' }}<br>
+                <label>Responsável Pedagógico:</label> {{ (filiacao.pessoa.pai.Responsavel && filiacao.pessoa.pai.Responsavel.pedagogico) ? 'Sim' : 'Não' }}<br>
+                <label class="mt-2"><h4 class="bordabaixo"><b>Endereço</b></h4></label><br>
+                <label>CEP:</label> {{ filiacao.pessoa.pai.Endereco.cep | mask: '00000-000' }} <br>
+                <label>Logradouro:</label> {{ filiacao.pessoa.pai.Endereco.logradouro }} <br>
+                <label>Número:</label> {{ filiacao.pessoa.pai.Endereco.numero }} <br>
+                <label *ngIf="filiacao.pessoa.pai.Endereco.complemento">Complemento:</label> {{ filiacao.pessoa.pai.Endereco.complemento }} <br *ngIf="filiacao.pessoa.pai.Endereco.complemento">
+                <label>Bairro:</label> {{ filiacao.pessoa.pai.Endereco.bairro }} <br>
+                <label>UF:</label> {{ filiacao.pessoa.pai.Endereco.uf }} <br>
+                <label>Cidade:</label> {{ filiacao.pessoa.pai.Endereco.cidade }} <br>
+            </div> -->
+
+            <ngb-tabset>
+                <ngb-tab title="Filiação 1">
+                  <ng-template ngbTabContent>
+                      <ngb-tabset>
+                          <ngb-tab title="Dados cadastrais">
+                            <ng-template ngbTabContent>
+                                <label>Nome:</label> {{ filiacao.pessoa.pai.Basicos.nome }} <br>
+                                <label>Data de nascimento:</label> {{ filiacao.pessoa.pai.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+                                <label>Identidade de gênero:</label> {{ filiacao.pessoa.pai.Basicos.sexo }} <br>
+                                <label>Nacionalidade:</label> {{ filiacao.pessoa.pai.Basicos.nacionalidade }} <br>
+                                <label>E-mail:</label> {{ filiacao.pessoa.pai.Basicos.email }} <br>
+                                <label>Telefone residencial:</label> {{ (!filiacao.pessoa.pai.Basicos.telefonefixo) ? 'Não informado' : filiacao.pessoa.pai.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+                                <label>Telefone celular:</label> {{ (!filiacao.pessoa.pai.Basicos.telefonecelular) ? 'Não informado' : filiacao.pessoa.pai.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+                                <label>CPF:</label> {{ filiacao.pessoa.pai.Documento.cpf | mask: '000.000.000-00' }} <br>
+                                <label>RG:</label> {{ filiacao.pessoa.pai.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{ filiacao.pessoa.pai.Documento.rgEmissor }} <br>
+                                <label>Responsável Financeiro:</label> {{ (filiacao.pessoa.pai.Responsavel && filiacao.pessoa.pai.Responsavel.financeiro) ? 'Sim' : 'Não' }}<br>
+                                <label>Responsável Pedagógico:</label> {{ (filiacao.pessoa.pai.Responsavel && filiacao.pessoa.pai.Responsavel.pedagogico) ? 'Sim' : 'Não' }}<br>
+                            </ng-template>
+                          </ngb-tab>
+                          <ngb-tab title="Endereço">
+                            <ng-template ngbTabContent>
+                                <label>CEP:</label> {{ filiacao.pessoa.mae.Endereco.cep | mask: '00000-000' }} <br>
+                                <label>Logradouro:</label> {{ filiacao.pessoa.mae.Endereco.logradouro }} <br>
+                                <label>Número:</label> {{ filiacao.pessoa.mae.Endereco.numero }} <br>
+                                <label *ngIf="filiacao.pessoa.mae.Endereco.complemento">Complemento:</label> {{ filiacao.pessoa.mae.Endereco.complemento }} <br *ngIf="filiacao.pessoa.mae.Endereco.complemento">
+                                <label>Bairro:</label> {{ filiacao.pessoa.mae.Endereco.bairro }} <br>
+                                <label>UF:</label> {{ filiacao.pessoa.mae.Endereco.uf }} <br>
+                                <label>Cidade:</label> {{ filiacao.pessoa.mae.Endereco.cidade }} <br>
+                            </ng-template>
+                          </ngb-tab>
+                        </ngb-tabset>
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Filiação 2">
+                  <ng-template ngbTabContent>
+                      <ngb-tabset>
+                          <ngb-tab title="Dados cadastrais">
+                            <ng-template ngbTabContent>
+                                <label>Nome:</label> {{ filiacao.pessoa.pai.Basicos.nome }} <br>
+                                <label>Data de nascimento:</label> {{ filiacao.pessoa.pai.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+                                <label>Identidade de gênero:</label> {{ filiacao.pessoa.pai.Basicos.sexo }} <br>
+                                <label>Nacionalidade:</label> {{ filiacao.pessoa.pai.Basicos.nacionalidade }} <br>
+                                <label>E-mail:</label> {{ filiacao.pessoa.pai.Basicos.email }} <br>
+                                <label>Telefone residencial:</label> {{ (!filiacao.pessoa.pai.Basicos.telefonefixo) ? 'Não informado' : filiacao.pessoa.pai.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+                                <label>Telefone celular:</label> {{ (!filiacao.pessoa.pai.Basicos.telefonecelular) ? 'Não informado' : filiacao.pessoa.pai.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+                                <label>CPF:</label> {{ filiacao.pessoa.pai.Documento.cpf | mask: '000.000.000-00' }} <br>
+                                <label>RG:</label> {{ filiacao.pessoa.pai.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{ filiacao.pessoa.pai.Documento.rgEmissor }} <br>
+                                <label>Responsável Financeiro:</label> {{ (filiacao.pessoa.pai.Responsavel && filiacao.pessoa.pai.Responsavel.financeiro) ? 'Sim' : 'Não' }}<br>
+                                <label>Responsável Pedagógico:</label> {{ (filiacao.pessoa.pai.Responsavel && filiacao.pessoa.pai.Responsavel.pedagogico) ? 'Sim' : 'Não' }}<br>
+                            </ng-template>
+                          </ngb-tab>
+                          <ngb-tab title="Endereço">
+                            <ng-template ngbTabContent>
+                                <label>CEP:</label> {{ filiacao.pessoa.pai.Endereco.cep | mask: '00000-000' }} <br>
+                                <label>Logradouro:</label> {{ filiacao.pessoa.pai.Endereco.logradouro }} <br>
+                                <label>Número:</label> {{ filiacao.pessoa.pai.Endereco.numero }} <br>
+                                <label *ngIf="filiacao.pessoa.pai.Endereco.complemento">Complemento:</label> {{ filiacao.pessoa.pai.Endereco.complemento }} <br *ngIf="filiacao.pessoa.pai.Endereco.complemento">
+                                <label>Bairro:</label> {{ filiacao.pessoa.pai.Endereco.bairro }} <br>
+                                <label>UF:</label> {{ filiacao.pessoa.pai.Endereco.uf }} <br>
+                                <label>Cidade:</label> {{ filiacao.pessoa.pai.Endereco.cidade }} <br>                            </ng-template>
+                          </ngb-tab>
+                        </ngb-tabset>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_3" *ngIf="(respFin$ | async) as respFin">
+            <div class="col-sm-12 pt-3">
+              <label>Nome:</label> {{ respFin.pessoa.Basicos.nome }} <br>
+              <label>Data de nascimento:</label> {{ respFin.pessoa.Basicos.dataNascimento | mask: '00/00/0000' }} <br>
+              <label>Identidade de gênero:</label> {{ respFin.pessoa.Basicos.sexo }} <br>
+              <label>Nacionalidade:</label> {{ respFin.pessoa.Basicos.nacionalidade }} <br>
+              <label>E-mail:</label> {{ respFin.pessoa.Basicos.email }} <br>
+              <label>Telefone residencial:</label> {{ (!respFin.pessoa.Basicos.telefonefixo) ? 'Não informado' : respFin.pessoa.Basicos.telefonefixo | mask: 'AA(00)0000-0000' }} <br>
+              <label>Telefone celular:</label> {{ (!respFin.pessoa.Basicos.telefonecelular) ? 'Não informado' : respFin.pessoa.Basicos.telefonecelular | mask: 'AA(00)00000-0000' }} <br>
+              <label>CPF:</label> {{ respFin.pessoa.Documento.cpf | mask: '000.000.000-00' }} <br>
+              <label>RG:</label> {{ respFin.pessoa.Documento.rg | mask: 'AA.AAA.AAA-AA' }}  -  <label>Emissor:</label> {{ respFin.pessoa.Documento.rgEmissor }} <br>
+              <label class="mt-3"><h4 class="bordabaixo"><b>Endereço</b></h4></label><br>
+              <label>CEP:</label> {{respFin.pessoa.Endereco.cep | mask: '00000-000' }} <br>
+              <label>Logradouro:</label> {{respFin.pessoa.Endereco.logradouro}} <br>
+              <label>Número:</label> {{respFin.pessoa.Endereco.numero}} <br>
+              <label *ngIf="respFin.pessoa.Endereco.complemento">Complemento:</label> {{respFin.pessoa.Endereco.complemento}} <br>
+              <label>Bairro:</label> {{respFin.pessoa.Endereco.bairro}} <br>
+              <label>UF:</label> {{respFin.pessoa.Endereco.uf}} <br>
+              <label>Cidade:</label> {{respFin.pessoa.Endereco.cidade}} <br>
+            </div>
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_4" *ngIf="(respPed$ | async) as respPed">
+            <div class="col-sm-12" style="padding-top:10px">
+              <label>Nome do aluno:</label> {{respPed.pessoa.Basicos.nome}} <br>
+              <label>Data de nascimento:</label> {{respPed.pessoa.Basicos.dataNascimento}} <br>
+              <label>Identidade de gênero:</label> {{respPed.pessoa.Basicos.sexo}} <br>
+              <label>Nacionalidade:</label> {{respPed.pessoa.Basicos.nacionalidade}} <br>
+              <label>E-mail:</label> {{respPed.pessoa.Basicos.email}} <br>
+              <label>Telefone residencial:</label> {{respPed.pessoa.Basicos.telefonefixo}} <br>
+              <label>Telefone celular:</label> {{respPed.pessoa.Basicos.telefonecelular}} <br>
+              <label>CPF:</label> {{respPed.pessoa.Documento.cpf}} <br>
+              <label>RG:</label> {{respPed.pessoa.Documento.rg}}  -  <label>Emissor:</label> {{respPed.pessoa.Documento.rgEmissor}} <br>
+              <label class="mt-3"><h4 class="bordabaixo"><b>Endereço</b></h4></label><br>
+              <label>CEP:</label> {{respPed.pessoa.Endereco.cep}} <br>
+              <label>Logradouro:</label> {{respPed.pessoa.Endereco.logradouro}} <br>
+              <label>Número:</label> {{respPed.pessoa.Endereco.numero}} <br>
+              <label *ngIf="respPed.pessoa.Endereco.complemento">Complemento:</label> {{respPed.pessoa.Endereco.complemento}} <br>
+              <label>Bairro:</label> {{respPed.pessoa.Endereco.bairro}} <br>
+              <label>UF:</label> {{respPed.pessoa.Endereco.uf}} <br>
+              <label>Cidade:</label> {{respPed.pessoa.Endereco.cidade}} <br>
+            </div>
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_5" *ngIf="(fichaSaude$ | async) as fichaSaude">
+            <div class="col-sm-12">
+              <label>Tipo sanguineo: </label> {{ fichaSaude.fichaSaude.tipoSanguineo }}<br>
+              <label>Plano de saúde: </label> {{ (fichaSaude.fichaSaude.nomePlanoSaude) ? fichaSaude.fichaSaude.nomePlanoSaude : 'Não declarado' }}<br>
+              <label>Necessidades Especiais: </label> {{ (fichaSaude.fichaSaude.nomeNecessidadeEspecial) ? fichaSaude.fichaSaude.nomeNecessidadeEspecial : 'Não declarado' }}<br>
+              <label>Alergico a medicamentos: </label> {{ (fichaSaude.fichaSaude.nomeAlergiaMedicamento) ? fichaSaude.fichaSaude.nomeAlergiaMedicamento : 'Não declarado' }}<br>
+              <label>Tratamento medico: </label> {{ (fichaSaude.fichaSaude.nomeTratamentoMedico) ? fichaSaude.fichaSaude.nomeTratamentoMedico : 'Não declarado' }}<br>
+              <label>Medicação regular: </label> {{ (fichaSaude.fichaSaude.nomeMedicacaoRegular) ? fichaSaude.fichaSaude.nomeMedicacaoRegular : 'Não declarado' }}<br>
+              <label>Informação adicional: </label> {{ (fichaSaude.fichaSaude.informacaoAdicional) ? fichaSaude.fichaSaude.informacaoAdicional : 'Não declarado' }}<br>
+            </div>
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_6" *ngIf="(fichaSaida$ | async) as fichaSaida">
+              <div *ngIf="fichaSaida.autorizacaoSaida.idTipoAutorizacaoSaida === 1"><label>Autorização de Saida:</label> Verde</div>
+              <div *ngIf="fichaSaida.autorizacaoSaida.idTipoAutorizacaoSaida === 2"><label>Autorização de Saida:</label> Amarelo</div>
+              <div *ngIf="fichaSaida.autorizacaoSaida.idTipoAutorizacaoSaida === 3"><label>Autorização de Saida:</label> Vermelho</div>
+              <div *ngIf="fichaSaida.autorizacaoSaida.idTipoAutorizacaoSaida === 4"><label>Autorização de Saida:</label> Azul</div>
+              
+              <div *ngIf="fichaSaida.autorizacaoSaida.idTipoAutorizacaoSaida === 2 || fichaSaida.autorizacaoSaida.idTipoAutorizacaoSaida === 3">
+                <label>Pessoas autorizadas a retirar o aluno:</label><br>
+                <label>Filiação 1: </label> {{ (fichaSaida.autorizacaoSaida.mae === 1) ? 'Sim' : 'Não' }}<br>
+                <label>Filiação 2: </label> {{ (fichaSaida.autorizacaoSaida.pai === 1) ? 'Sim' : 'Não' }}<br>
+                <label>Responsável Financeiro: </label> {{ (fichaSaida.autorizacaoSaida.responsavelFinanceiro === 1) ? 'Sim' : 'Não' }}<br>
+                <label>Responsável Pedagógico: </label> {{ (fichaSaida.autorizacaoSaida.responsavelPedagogico === 1) ? 'Sim' : 'Não' }}<br>
+                <div *ngIf="autorizacaoRetirarAluno">
+                    <label>Transporte Escolar</label><br><br>
+                  <label>Nome: </label> {{ fichaSaida.autorizacaoRetirarAluno.nome }}<br>
+                  <label>CPF: </label> {{ fichaSaida.autorizacaoRetirarAluno.cpf }}<br>
+                  <label>Parentesco: </label> {{ fichaSaida.autorizacaoRetirarAluno.parentesco }}<br>
+                  <label>Telefone Residencial: </label> {{ fichaSaida.autorizacaoRetirarAluno.telefonefixo }}<br>
+                  <label>Telefone Celular: </label> {{ fichaSaida.autorizacaoRetirarAluno.telefonecelular }}<br>
+                </div>
+              </div>
+              <div *ngIf="transporteEscolar">
+                <label>Transporte Escolar</label><br><br>
+                <label>Nome do Condutor:</label> {{ fichaSaida.transporteEscolar.nomeCondutor }}<br>
+                <label>Telefone:</label> {{ fichaSaida.transporteEscolar.telefoneCondutor }}<br>
+              </div>
+              <label>Vale Transporte</label><br>
+              <label>SPTrans</label> {{ (fichaSaida.valeTransporte.spTrans) ? 'Sim' : 'Não' }}
+              <label>Cartão Bom</label> {{ (fichaSaida.valeTransporte.bom) ? 'Sim' : 'Não' }}
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_7" *ngIf="(documentos$ | async) as documentos">
+            <label>Documentos do aluno:</label><br>
+            <div *ngFor="let documento of documentos.docAluno">
+                <i class="fas fa-times-circle text-danger" *ngIf="(!documento.documentoEntregue)"></i>
+                <i class="fas fa-check-circle text-success" *ngIf="(documento.documentoEntregue)"></i>
+                     {{documento.descricao}}<br>
+                <!-- <div *ngIf="documento.documentoEntregue">
+                  <img [src]="documento.documentoEntregue.imageBase64">
+                </div> -->
+                
+            </div>
+          </div>
+          <!-- /.tab-pane -->
+          <div class="tab-pane" id="tab_8" *ngIf="(planoPagamento$ | async) as planoPagamento">
+            <label>Plano:</label> {{ planoPagamento.descricao }}: de {{ planoPagamento.valorTotal | currency:'BRL':'symbol':'1.2-2' }} 
+            por {{ planoPagamento.valorTotalDesconto | currency:'BRL':'symbol':'1.2-2' }} ({{ planoPagamento.desconto | number:'1.1-1' }}% 
+            desconto)<br>
+            <div *ngFor="let pagamento of planoPagamento.planosPagamento | orderBy:'tipoArrecadacao':'desc'">
+              <label>Tipo:</label> {{ pagamento.tipoArrecadacao }} <br>
+              <label>Desconto:</label> {{ pagamento.descontoPlano | number:'1.1-1' }} %<br>
+              <label>Número de parcelas:</label> {{ pagamento.numeroParcelas }}<br>
+              <label>Valor da parcela:</label> {{ pagamento.valorParcela | currency:'BRL':'symbol':'1.2-2' }}<br>
+              <label>Valor total:</label> {{ pagamento.valorTotal | currency:'BRL':'symbol':'1.2-2' }} <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="activeModal.close('Close click')">Fechar</button>
+  <button type="button" class="btn esquerda" [routerLink]="['/admin/matricula/aluno',{idMatricula: idMatricula, navega: true}]">Alterar</button>
+</div>

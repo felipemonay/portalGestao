@@ -1,0 +1,33 @@
+export interface Unidade {
+    idUnidade: number;
+    idCidade: number;
+    nome: string;
+    telefone: number;
+    endereco: string;
+    numero: string;
+    complemento: string;
+    bairro: string;
+    cep: string;
+    descricao: string;
+    cnpj: number;
+    autorizacao: string;
+    orgao: string;
+    resumo: string;
+    sequenciarm: number;
+    filiacaoredecard: string;
+    sovendacartao: string;
+    idcliente: number;
+    idCursopadrao: number;
+    usuarioredecard: number;
+    senharedecard: number;
+    sigla: string;
+    chave_pagarme: string;
+    idrecebedor: string;
+    inscricaomun: number;
+    email: string;
+    idintegracao: number;
+    emailcoordenacao: string;
+    sequenciaRPS: number;
+    entidadeinep: number;
+    idEmpresa: number;
+}

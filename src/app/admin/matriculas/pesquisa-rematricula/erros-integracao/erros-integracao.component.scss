@@ -1,0 +1,22 @@
+.linha{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.opcoes{
+    min-height: 80px;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transform: translateY(20%); 
+}
+
+.col-sm-2{
+    padding: 0px;
+}
+
+.col-sm-3{
+    padding: 0px;
+}

@@ -1,0 +1,34 @@
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="card col-sm-12">
+      <form [formGroup]="f" novalidate *ngIf="f">
+        <div class="cardHeader">
+          <h3>Turno</h3>
+        </div>
+        <div class="cardBody">
+          <div class="col-sm-3">
+            <label>Descrição</label>
+            <input formControlName="descricao" class="form-control"/>
+          </div>
+          <div class="col-sm-3">
+            <label>Sigla</label>
+            <input formControlName="sigla" class="form-control"/>
+          </div>
+          <div class="col-sm-3">
+            <label>Resumo</label>
+            <input formControlName="resumo" class="form-control"/>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>  
+        <button class="btn btn-prox" id="proximo-btn" type="submit" (click)="onSubmit()">
+          Próximo
+        </button>
+      </form>
+    </div>
+  </section> 
+</div>

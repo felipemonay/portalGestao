@@ -1,0 +1,25 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+      <!-- <div class="panel-aviso">
+        <img class="imgAviso" src="assets/img/teste_copa1.jpg">
+      </div> -->
+      <div class="alinhamentoFilhos" center *ngIf="(alunos$ | async) as alunos">
+        <div class="panel-aluno" *ngFor="let aluno of alunos.aluno">
+          <img class="imgFilho" onerror="this.src='assets/img/Personagens.png'" src="{{aluno.urlfoto}}" alt="Filho">
+          <span class="nomeAluno"><b>{{aluno.nome}}</b></span>
+          <span><p>{{aluno.turma}} - {{aluno.PeriodoLetivo}}</p></span>
+          <button class="btnAluno vermelho" *ngIf="!aluno.confirmada"  (click)="navigateTo('../matricula/aluno', aluno)" 
+          >Rematricula</button>
+          <button class="btnAluno verde" *ngIf="aluno.confirmada" disabled>Matriculado</button>
+          <button class="btnAluno vermelho" [routerLink]="['/admin/produtos']">Loja</button>
+        </div>
+      </div>
+  </section>
+  <!-- /.content -->
+</div>

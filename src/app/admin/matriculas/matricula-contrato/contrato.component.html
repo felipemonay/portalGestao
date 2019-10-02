@@ -1,0 +1,27 @@
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <app-etapa [pagina]="'contrato'" [idMatricula]="idMatricula" [navega]="navega"></app-etapa>
+    </section>
+    <section class="content">
+        <form [formGroup]="f" novalidate >
+            <div class="content  ">
+                <h3 class="bordabaixo">Etapa 9/9 - Contrato</h3>
+                <div class="submenu">
+                    <div class=" embed-responsive" style="height: 450px" >
+                        <embed [src]="contratoPDF" class="" type="application/pdf" style="width: -webkit-fill-available;width: -moz-fill-available;" />
+                    </div>
+                    <div class="row interno  ">
+                        <div class="col-12" style="font-size: larger;text-align: right;font-weight: bolder;padding: 0px 52px;"> 
+                            <label><input type="checkbox" formControlName="termoAceite" >
+                            Eu li e concordo com os termos e condições apresentadas.</label>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+            <button class="btn btn-prox" id="proximo-btn" name="proximo" type="submit" (click)="onSubmit()">Concluir</button>
+            <button class="btn btn-prox" id="voltar-btn" name="voltar" type="submit" (click)="backClicked()">Voltar</button>
+        </form>
+    </section>
+</div>
+    

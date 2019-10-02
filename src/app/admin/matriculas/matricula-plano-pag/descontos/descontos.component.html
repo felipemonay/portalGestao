@@ -1,0 +1,114 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Descontos</h4>
+  <button type="button" class="closeBtn" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span class="closeSpan" aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div style="overflow-y: hidden; height: calc(100vh - 35rem);" *ngIf="(tipoArrecadacao$ | async) as tipoArrecadacao">
+    <div class="px-2" style="overflow-y: auto; height: 100%;" *ngIf="(tipoDescontos$ | async) as tipoDescontos">
+      <form [formGroup]="form" novalidate>
+        <div class="col-sm-12" formArrayName="descontos"  *ngFor="let item of formArrayDescontos?.value; let i = index;" >
+          <div [formGroupName]="i" >
+            <div class="col-sm-12 p-2" *ngIf="item.acao !== '1-delete'" style="border-top: 0.5px solid gray"  >
+              <div class="col-sm-11">
+                <div class="col-sm-4">
+                  <label>Tipo de Arrecadacao:<br /></label>
+                  <select class="form-control" formControlName="idTipoArrecadacao" >
+                    <option value>Selecione...</option>
+                    <option *ngFor="let tipoArrecadacao of tipoArrecadacao.data" [value]="tipoArrecadacao.idTipoArrecadacao">{{tipoArrecadacao.descricao}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-5">
+                  <label>Tipo de desconto:<br /></label>
+                  <select class="form-control" formControlName="idTipoDesconto"  >
+                      <option value>Selecione...</option>
+                      <option *ngFor="let tipoDesconto of tipoDescontos" [value]="tipoDesconto.idTipoDesconto">{{tipoDesconto.descricao}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                  <label>Percentual de desconto:<br /></label>
+                  <input type="text" class="form-control" formControlName="percentual" [value]="item.percentual" />
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <i  class="far fa-minus-square fa-2x mt-5 mx-2" style="color: red;cursor:pointer;" (click)="removerDesconto(i);"></i>
+              </div>
+              <div class="col-sm-11">
+                <div class="col-sm-12"><label>Período de concessão do desconto</label></div>  
+                <div class="col-sm-6">
+                  <label>inicio</label>
+                  <input type="text" class="form-control" formControlName="datainicio" [value]="item.datainicio" />
+                </div>
+                <div class="col-sm-6">
+                  <label>final</label> 
+                  <input type="text" class="form-control" formControlName="datafinal" [value]="item.datafinal "  />
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="col-sm-12">
+                  <label>Motivo Desconto: </label>
+                  <textarea class="form-control" formControlName="observacao" [value]="item.observacao"></textarea>
+                </div>
+                <div class="col-sm-12">
+                  <label>Data concessão desconto: </label>
+                  <input type="text" class="form-control" formControlName="data" [value]="(item.data | date:'dd/MM/yyyy HH:mm:ss')" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="col-sm-12 p-2" style="border-top: 0.5px solid green;">
+        <div class="col-sm-12">
+            <h4>Novo Desconto</h4>
+        </div>
+        <div class="col-10">
+          <div class="col-sm-4">
+            <label class="required">Tipo Arrecadação:</label>
+              <select class="form-control" id="inputTextTipoArrecadacao" [(ngModel)]="novoDesconto.idTipoArrecadacao"  >
+                <option value>Selecione...</option>
+                <option *ngFor="let tipoArrecadacao of tipoArrecadacao.data" [value]="tipoArrecadacao.idTipoArrecadacao">{{tipoArrecadacao.descricao}}</option>
+              </select>
+          </div>          
+          <div class="col-sm-5">
+            <label class="required">Tipo de desconto:</label>
+            <select class="form-control" id="inputTextTipoDesconto" [(ngModel)]="novoDesconto.idTipoDesconto" >
+              <option value>Selecione...</option>
+              <option *ngFor="let tipoDesconto of tipoDescontos" [value]="tipoDesconto.idTipoDesconto">{{tipoDesconto.descricao}}</option>
+            </select>
+          </div>      
+          <div class="col-sm-3">
+            <label>Percentual de Desconto:</label>
+            <input type="text" class="form-control" [(ngModel)]="novoDesconto.percentual" />
+          </div>
+        </div>
+        <div class="col-sm-2">
+            <i class="far fa-plus-square fa-2x mt-5 mx-2" style="color: green;cursor:pointer;" (click)="inserirNovoDesconto()"></i>
+        </div>
+        <div class="col-sm-10">
+            <div class="col-sm-12" ><label>Período de concessão do desconto</label></div>  
+            <div class="col-sm-6">
+              <label>inicio</label>
+              <input type="text" class="form-control"  [(ngModel)]="novoDesconto.datainicio " [value]="01/01/2020"  mask="00/00/0000" [dropSpecialCharacters]="false"  />
+            </div>
+            <div class="col-sm-6">
+              <label>final</label> 
+              <input type="text" class="form-control"  [(ngModel)]="novoDesconto.datafinal" [value]="31/12/2020"  mask="00/00/0000" [dropSpecialCharacters]="false" />
+            </div>
+        </div>
+        <div class="col-sm-10">
+          <div class="col-sm-12"> 
+            <label>Motivo Desconto: </label>
+            <textarea class="form-control" [(ngModel)]="novoDesconto.observacao" minlength="3" ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>         
+  </div>
+  <div class="col-12 m-5 text-align:rigth">
+    <button type="button"   class="btn btn-outline-dark" (click)="aplicaDesconto();">Aplicar</button>
+  </div>
+  <!-- <app-form-debug [form]="form"></app-form-debug>  -->
+</div>

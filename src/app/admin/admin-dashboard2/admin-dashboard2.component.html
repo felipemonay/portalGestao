@@ -1,0 +1,277 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Acompanhamento de Metas 
+      <span>Version 0.1</span>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard">Painéis</i></a></li>
+      <li class="active">Acompanhamento Metas</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+      <div class="row">
+          <div class="col-md-12">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Periodos</h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="row">
+                <div class="col-sm-3 col-xs-6 border-light" *ngFor="let periodo of dadosPeriodos" >
+                  <div class="description-block">
+                    <h5 class="description-header">{{periodo.descricao}}</h5>
+                    <small class="description-text">{{periodo.dataInicio}} {{periodo.dataFim}}</small>
+                  </div>
+                  <div  style="text-align:-webkit-center;">
+                    <div class="progress-pie" [attr.aria-label]="(periodo.dadosMeta.total.completude | number:'0.0-0')" 
+                                              [attr.aria-valuetext]="(periodo.dadosMeta.total.completude+'%')">
+                    </div>
+                
+                    <div style="padding: 0px 10px">
+                      <div style="display: flow-root">
+                        <span class="progress-text small" style="float: left">Duração em dias: </span>
+                        <span class="progress-number small" style="float: right">
+                          <b>{{periodo.dadosMeta.duracao.realizado}}</b>/{{periodo.dadosMeta.duracao.total}}
+                        </span>
+                      </div>
+                      <div class="progress dashsmall">
+                        <div class="progress-bar progress-bar-aqua " [style.width]="periodo.dadosMeta.duracao.completude+'%'">
+                          {{periodo.dadosMeta.duracao.completude}}%
+                        </div>
+                        <small class="progress-label">&nbsp;{{periodo.dadosMeta.duracao.faltantes}} Dias restantes </small>
+                      </div>
+                      <div style="display: flow-root">
+                        <span class="progress-text small" style="float: left">Meta total: </span>
+                        <span class="progress-number small" style="float: right">
+                          <b>{{periodo.dadosMeta.total.realizado}}</b>/{{periodo.dadosMeta.total.total}}
+                        </span>
+                      </div>
+                      <div class="progress dashsmall">
+                        <div class="progress-bar progress-bar-light-blue" [style.width]="periodo.dadosMeta.total.completude+'%'">
+                          {{periodo.dadosMeta.total.completude}}%
+                        </div>
+                        <small class="progress-label">&nbsp;{{periodo.dadosMeta.total.faltantes}} Dias restantes </small>
+                      </div>
+                      <div style="display: flow-root">
+                        <span class="progress-text small" style="float: left">Meta matricula: </span>
+                        <span class="progress-number small" style="float: right">
+                          <b>{{periodo.dadosMeta.matricula.realizado}}</b>/{{periodo.dadosMeta.matricula.total}}
+                        </span>
+                      </div>
+                      <div class="progress dashsmall">
+                        <div class="progress-bar progress-bar-green " [style.width]="periodo.dadosMeta.matricula.completude+'%'">
+                          {{periodo.dadosMeta.matricula.completude}}%
+                        </div>
+                        <small class="progress-label">&nbsp;{{periodo.dadosMeta.matricula.faltantes}} Dias restantes </small>
+                      </div>
+                      <div style="display: flow-root">
+                        <span class="progress-text small" style="float: left">Meta rematricula: </span>
+                        <span class="progress-number small" style="float: right">
+                          <b>{{periodo.dadosMeta.rematricula.realizado}}</b>/{{periodo.dadosMeta.rematricula.total}}
+                        </span>
+                      </div>
+                      <div class="progress dashsmall">
+                        <div class="progress-bar progress-bar-green " [style.width]="periodo.dadosMeta.rematricula.completude+'%'">
+                          {{periodo.dadosMeta.rematricula.completude}}%
+                        </div>
+                        <small class="progress-label">&nbsp;{{periodo.dadosMeta.rematricula.faltantes}} Dias restantes </small>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+              </div>
+  
+              <div class="box-footer">
+                  <div class="box-header with-border">
+                      <h3 class="box-title">{{dadosJanela.descricao}}</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="text-center">
+                            <strong></strong>
+                          </p>  
+                          <!-- /.progress-group - Duracao -->
+                          <div class="progress-group">
+                            <div class="col-md-12">
+                              <span class="progress-text">Duração em dias</span>
+                              <span class="progress-number">
+                                <b>{{dadosJanela.dadosMeta.duracao.realizado}}</b>/
+                                {{dadosJanela.dadosMeta.duracao.total}}
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="progress md">
+                                <div class="progress-bar progress-bar-aqua " [style.width]="dadosJanela.dadosMeta.duracao.completude+'%'">
+                                  {{dadosJanela.dadosMeta.duracao.completude}}%
+                                </div>
+                                <small class="progress-label">&nbsp;{{dadosJanela.dadosMeta.duracao.faltantes}} Dias restantes </small>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.progress-group -->
+                          <!-- /.progress-group - total -->
+                          <div class="progress-group">
+                            <div class="col-md-12">
+                              <span class="progress-text">Meta total</span>
+                              <span class="progress-number">
+                                <b>{{dadosJanela.dadosMeta.total.realizado}}</b>/
+                                   {{dadosJanela.dadosMeta.total.total}}
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="progress md">
+                                <div class="progress-bar progress-bar-light-blue" [style.width]="dadosJanela.dadosMeta.total.completude+'%'">
+                                    {{dadosJanela.dadosMeta.duracao.completude}}%
+                                </div>
+                                <small class="progress-label">&nbsp;{{dadosJanela.dadosMeta.total.faltantes}} faltantes </small>
+                              </div>
+      
+                            </div>
+                          </div>
+                          <!-- /.progress-group -->
+                          <!-- /.progress-group - matricula -->
+                          <div class="progress-group">
+                            <div class="col-md-12">
+                              <span class="progress-text">Meta matricula</span>
+                              <span class="progress-number">
+                                <b>{{dadosJanela.dadosMeta.matricula.realizado}}</b>/
+                                {{dadosJanela.dadosMeta.matricula.total}}
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="progress md">
+                                <div class="progress-bar progress-bar-green" [style.width]="dadosJanela.dadosMeta.matricula.completude+'%'">
+                                  {{dadosJanela.dadosMeta.matricula.completude}}%
+                                </div>
+                                <small class="progress-label">&nbsp;{{dadosJanela.dadosMeta.matricula.faltantes}} faltantes</small>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.progress-group -->
+                          <!-- /.progress-group - matricula -->
+                          <div class="progress-group">
+                            <div class="col-md-12">
+                              <span class="progress-text">Meta rematrícula</span>
+                              <span class="progress-number">
+                                <b>{{dadosJanela.dadosMeta.rematricula.realizado}}</b>/
+                                   {{dadosJanela.dadosMeta.rematricula.total}}
+                              </span>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="progress md">
+                                <div class="progress-bar progress-bar-green" [style.width]="dadosJanela.dadosMeta.rematricula.completude+'%'">
+                                  {{dadosJanela.dadosMeta.rematricula.completude}}%
+                                </div>
+                                <small class="progress-label">&nbsp;{{dadosJanela.dadosMeta.rematricula.faltantes}} faltantes</small>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.progress-group -->
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                    <!-- ./box-body -->
+      
+                <!-- /.row -->
+              </div>
+              <!-- /.box-footer -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+    
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Turmas</font></font></h3>
+      </div>
+      <div class="box-body" >
+          <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <thead>
+              <tr>
+                  <th class="col-md-4">Curso</th>
+                  <th class="col-md-2">Serie</th>
+                  <th class="col-md-2">Turno</th>
+                  <th class="col-md-2">Turma</th>
+                  <th class="col-md-2">Capacidade</th>
+                  <th class="col-md-2">Vagas</th>
+                  <th class="col-md-2">Taxa de Ocupacao</th>
+                  <th class="col-md-2">Meta Total</th>
+                  <th class="col-md-2">Meta Realizado</th>
+                  <th class="col-md-2">Meta Percentual</th>
+                  <th class="col-md-2">Matriculas Total</th>
+                  <th class="col-md-2">Matriculas Realizado</th>
+                  <th class="col-md-2">Matriculas percentual</th>
+                  <th class="col-md-2">Rematriculas Total</th>
+                  <th class="col-md-2">Rematriculas Realizado</th>
+                  <th class="col-md-2">Rematriculas percentual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let turma of dadosTurmas">
+                <td class="col-md-4">
+                    {{ turma.curso }}
+                </td>
+                <td class="col-md-2">
+                    {{ turma.serie }}
+                </td>
+                <td class="col-md-2">
+                    {{ turma.turno }}
+                </td>
+                <td class="col-md-2">
+                    {{ turma.turma }}
+                </td>
+                <td class="col-md-2">
+                    {{ turma.capacidade }}
+                </td>
+                <td class="col-md-2">
+                    {{ turma.vagas }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.taxaOcupacao }}%
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.total.meta }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.total.realizado }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.total.percentual }}%
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.matriculas.meta }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.matriculas.realizado }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.matriculas.percentual }}%
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.rematriculas.meta }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.rematriculas.realizado }}
+                </td> 
+                <td class="col-md-2">
+                    {{ turma.dadosMetas.rematriculas.percentual }}%
+                </td> 
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>

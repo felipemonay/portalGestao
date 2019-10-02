@@ -1,0 +1,17 @@
+<div class="linha">
+  <div class="opcoes col-sm-2" (click)="integraMatricula(aluno.idMatricula)">
+    <i class="fas fa-user-graduate fa-lg" ></i><br><small>Dados Aluno</small>
+  </div>
+  <div class="opcoes col-sm-2" (click)="integraFiliacao(aluno.idMatricula)">
+    <i class="fas fa-user-graduate fa-lg" ></i><br><small>Filiação</small>
+  </div>
+  <div class="opcoes col-sm-2" (click)="integraResponsavel(aluno.idMatricula, 'financeiro')">
+    <i class="fas fa-user-graduate fa-lg" ></i><br><small>Responsável Financeiro</small>
+  </div>
+  <div class="opcoes col-sm-2" (click)="integraResponsavel(aluno.idMatricula, 'pedagogico')">
+    <i class="fas fa-user-graduate fa-lg" ></i><br><small>Responsável Pedagogico</small>
+  </div>
+  <div class="opcoes col-sm-2" (click)="integraMensalidade(aluno.idMatricula)">
+    <i class="fas fa-user-graduate fa-lg" ></i><br><small>Mensalidade</small>
+  </div>
+</div>

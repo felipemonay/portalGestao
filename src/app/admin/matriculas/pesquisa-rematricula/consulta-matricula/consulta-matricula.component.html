@@ -1,0 +1,11 @@
+<!-- <div style="display: inline-flex;min-height: 80px;align-items: center; cursor: pointer" (click)="open(aluno.idMatricula)">
+    <i class="fas fa-user-graduate fa-lg" ></i><small>Consulta</small>
+</div> -->
+<div class="linha">
+    <div class="opcoes col-sm-2" (click)="open(aluno.idMatricula)">
+        <i class="fas fa-search-plus fa-lg" ></i><br><small>Consultar</small>
+    </div>
+    <div class="opcoes col-sm-2" [routerLink]="['/admin/matricula/aluno',{idMatricula: aluno.idMatricula, navega: true}]">
+        <i class="fas fa-user-edit fa-lg"></i><br><small>Alterar</small>
+    </div>
+</div>

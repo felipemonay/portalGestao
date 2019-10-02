@@ -1,0 +1,76 @@
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="card col-sm-12">
+      <div class="cardHeader">
+        <h3>Lista de Series
+          <i class="fas fa-plus fa-md direita" [routerLink]="['/admin/parametros/serie']"></i>
+        </h3>
+      </div>
+      <div class="cardBody">
+        <div>
+          <div class="row thead">
+            <div class="col-sm-2">Série</div>
+            <div class="col-sm-4">Turno</div>
+            <div class="col-sm-2">Curso</div>
+            <div class="col-sm-2">Periodo Letivo</div>
+            <div class="col-sm-2">Nº</div>
+            <div class="col-sm-2">Vagas</div>
+            <div class="col-sm-2">Idade Minima</div>
+            <div class="col-sm-2">Idade Máxima</div>
+            <div class="col-sm-2">Status</div>
+            <div class="col-sm-2">Data Inicio</div>
+            <div class="col-sm-2">Data Final</div>
+            <div class="col-sm-2">Critério Avaliação</div>
+          </div>
+          <div class="tbody">
+            <div class="row hoverRow" *ngFor="let serie of series">
+              <div class="col-sm-11" (click)="update(serie.idSerie)">
+                <div class="col-sm-1">
+                  <div>{{ serie.descricao }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.descricaoTurno }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.descricaoCurso }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.descricaoPeriodoLetivo }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.serie }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.vagas }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.idadeMinima }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.idadeMaxima }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.ativa }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.datainicio }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.datafinal }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ serie.descricaoCriterioAvaliacao }}</div>
+                </div>
+              </div>
+              <div class="col-sm-1" right>
+                <button (click)="delete(serie.idSerie)">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+</div>

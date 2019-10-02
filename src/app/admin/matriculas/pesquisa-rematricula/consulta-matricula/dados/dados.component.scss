@@ -1,0 +1,41 @@
+.nav-tabs-custom .nav-tabs li.active {
+    border-top-color:#ED1C24 !important;
+  }
+
+.tab-pane{
+  border-top: solid 0.7px #ccc; 
+  padding-top: 10px;
+}
+
+a{
+  text-align: center;
+  padding: 10px 8px !important;
+}
+
+.modal-header{
+  padding: 5px 15px;
+}
+
+.modal-body{
+  padding: 0px !important;
+}
+
+.esquerda{
+  float: left;
+}
+
+.subtitle{
+  border-bottom: solid 1px
+}
+
+.bordabaixo{
+  border-bottom: 1px solid black !important;
+}
+
+.centralizado{
+  text-align: center;
+}
+
+.noMargin{
+  margin: 0px;
+}

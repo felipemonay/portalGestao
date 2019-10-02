@@ -1,0 +1,58 @@
+<div class="container app-login">
+    <div class="meio">
+        <div class="panel panel-default">
+            <div class="panel-header">
+                <div class="logo">
+                    <img src="assets/img/logos/logo.png">
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="errorCredentials">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    Usuário ou senha inválidos.
+                </div>
+                <form [formGroup]="f" novalidate>
+                    <div class="form-group has-feedback" [ngClass]="{'has-success': f.controls['email'].valid,
+                                                                        'has-error': f.controls['email'].invalid && 
+                                                                        (f.controls['email'].touched || f.controls['email'].dirty)}">
+                        <input type="email" formControlName="email" class="form-control" id="InputEmail" placeholder="Email">
+                        <span *ngIf="f.controls['email'].valid" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                        <span *ngIf="f.controls['email'].invalid && (f.controls['email'].touched || f.controls['email'].dirty)">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            <span class="text-danger">E-mail inválido.</span>
+                        </span>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-success': f.controls['password'].valid,
+                                                        'has-error': f.controls['password'].invalid && 
+                                                                    (f.controls['password'].touched || f.controls['password'].dirty)}">
+                        <input type="password" formControlName="password" class="form-control" id="InputPassword" placeholder="Senha">
+                        <span class="text-danger" *ngIf="f.controls['password'].invalid && (f.controls['password'].touched || f.controls['password'].dirty)">
+                            Campo obrigatório.
+                        </span>
+                    </div>
+                    <button type="submit" class="btn login_btn primeiro"  (click)="onSubmit()"><b>Entrar</b></button>
+                    <button type="submit" class="btn login_btn"  (click)="onSubmit()"><i class="fa fa-google marDir"></i><b>Google</b></button>    
+                    <label class="esqueci mt-3" (click)="navigateTo()"><u>Esqueci a senha!</u></label>
+                </form>
+                <div class="row">
+                    <div class="col"><br/>
+                        <p class="frase">
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <b>Educação muda as pessoas. Pessoas transformam o mundo.</b>
+                            <i class="fa fa-quote-right" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span class="float-right autor">
+                            <i>Paulo Freire</i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

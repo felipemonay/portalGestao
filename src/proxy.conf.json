@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "http://des.api.rededecisao.com/api",
+        "secure": false
+    }
+}

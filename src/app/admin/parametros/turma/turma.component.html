@@ -1,0 +1,70 @@
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="card col-sm-12">
+      <form [formGroup]="f">
+        <div class="cardHeader">
+          <h3>Turma</h3>
+        </div>
+        <div class="cardBody">
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Nome</label>
+              <input formControlName="descricao" class="form-control"/>
+            </div>
+            <div class="col-sm-3">
+              <label>Data Inicial</label>
+              <input formControlName="dataInicio" class="form-control"/>
+            </div>
+            <div class="col-sm-3">
+              <label>Data Final</label>
+              <input formControlName="dataFinal" class="form-control"/>
+            </div>
+            <div class="col-sm-2">
+              <label>Número de Inscritos</label>
+              <input formControlName="inscritos" class="form-control" readonly/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Detalhes</label>
+              <input formControlName="detalhes" class="form-control"/>
+            </div>
+            <div class="col-sm-2">
+              <label>Capacidade</label>
+              <input formControlName="capacidade" class="form-control"/>
+            </div>
+            <div class="col-sm-2">
+              <label>Meta de Ocupação</label>
+              <input formControlName="ocupacaoMeta" class="form-control"/>
+            </div>
+            <div class="col-sm-2">
+              <label>Número de Vagas</label>
+              <input formControlName="vagas" class="form-control" readonly/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+                <label>Série</label>
+                <select class="form-control" formControlName="idSerie" >
+                  <option value>Selecione...</option>
+                  <option *ngFor="let serie of series" [value]="serie.idSerie"> {{serie.descricao}}</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <label>Turno</label>
+                <select class="form-control" formControlName="idTurno" >
+                  <option value>Selecione...</option>
+                  <option *ngFor="let turno of turnos" [value]="turno.idTurno"> {{turno.descricao}}</option>
+                </select>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-prox mt-5 mb-5" id="proximo-btn" type="submit" (click)="onSubmit()">
+          Próximo
+        </button>
+      </form>
+    </div>
+  </section> 
+</div>

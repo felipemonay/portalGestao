@@ -1,0 +1,63 @@
+<div class="container app-login">
+  <div class="meio">
+    <div class="panel panel-default">
+      <div class="panel-header">
+        <div class="logo">
+            <img src="assets/img/logos/logo.png">
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="errorCredentials">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            CPF ou data de nascimento inválidos.
+        </div>
+        <form [formGroup]="f" novalidate>
+            <div class="form-group has-feedback"
+                [ngClass]="{'has-success': f.controls['cpf'].valid,
+      'has-error': f.controls['cpf'].invalid && (f.controls['cpf'].touched || f.controls['cpf'].dirty)}">
+                  
+                  <input type="cpf" formControlName="cpf" class="form-control" id="InputCpf"
+                      placeholder="CPF" mask="000.000.000-00">
+                  <span *ngIf="f.controls['cpf'].valid" class="glyphicon glyphicon-ok form-control-feedback"
+                      aria-hidden="true"></span>
+                  <span
+                      *ngIf="f.controls['cpf'].invalid && (f.controls['cpf'].touched || f.controls['cpf'].dirty)">
+                      <span class="glyphicon glyphicon-remove form-control-feedback"
+                          aria-hidden="true"></span>
+                      <span class="text-danger">CPF inválido.</span>
+                  </span>
+              </div>
+              <div class="form-group"
+                  [ngClass]="{'has-success': f.controls['dataNascimento'].valid,
+        'has-error': f.controls['dataNascimento'].invalid && (f.controls['dataNascimento'].touched || f.controls['dataNascimento'].dirty)}">
+                  <input type="dataNascimento" formControlName="dataNascimento" class="form-control" id="InputPassword"
+                      placeholder="Data de nascimento" mask="00/00/0000" [dropSpecialCharacters]="false">
+                  <span class="text-danger"
+                      *ngIf="f.controls['dataNascimento'].invalid && (f.controls['dataNascimento'].touched || f.controls['dataNascimento'].dirty)">Data de nascimento
+                      obrigatório.</span>
+              </div>
+              <button type="submit" class="login_btn" [disabled]="f.invalid"
+                  (click)="onSubmit()"><b>Enviar nova senha</b></button>
+               <button type="submit" class="login_btn"
+                  (click)="navigateTo()"><b>Voltar</b></button>
+            </form>
+          <!-- <div class="row">
+              <div class="col"><br/>
+                  <p class="frase">
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                  <b>Educação muda as pessoas. Pessoas transformam o mundo.</b>
+                      <i class="fa fa-quote-right" aria-hidden="true"></i>
+                  </p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <span class="float-right autor">
+                      <i>Paulo Freire</i>
+                  </span>
+              </div>
+          </div> -->
+  </div>
+</div>

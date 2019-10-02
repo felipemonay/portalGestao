@@ -1,0 +1,64 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="alinhamentoProdutos" center>
+        <div class="card col-sm-12" *ngFor="let produto of produtos">
+            <div class="cardHeader">
+              <img class="imgProduto" onerror="this.src='assets/img/login/6.jpg'" src="{{ produto.imgproduto }}" alt="produto">
+            </div>
+            <div class="cardBody">
+              <h4><b>{{ produto.descricao }}</b></h4>
+              {{ produto.nome }}
+              {{ produto!.turma }}
+            </div>
+            <div class="cardFooter">
+              <div class="valor"> {{ produto.valorVenda | currency:'BRL':'symbol':'1.2-2' }}</div>
+              <button class="btnComprar vermelho" *ngIf="produto.comprado == 0"  (click)="navigateTo('../matricula/aluno', aluno)">
+                Comprar
+              </button>
+              <button class="btnComprar verde" *ngIf="produto.comprado == 1" disabled>Comprado</button>
+            </div>
+        </div>
+      <!-- <div class="card col-sm-12">
+          <div class="cardHeader">
+            <img class="imgProduto" onerror="this.src='assets/img/login/6.jpg'" src="#" alt="produto">
+          </div>
+          <div class="cardBody">
+            <h3><b>Nome do produto</b></h3>
+            Arthur Felipe Silva Barbosa
+            Turma
+          </div>
+          <div class="cardFooter">
+            <div class="valor">R$123,45</div>
+            <button class="btnComprar">
+              Comprar
+            </button>
+          </div>
+      </div>
+      <div class="card col-sm-12">
+          <div class="cardHeader">
+            <img class="imgProduto" onerror="this.src='assets/img/login/6.jpg'" src="#" alt="produto">
+          </div>
+          <div class="cardBody">
+            <h3><b>Nome do produto agora muito muito muito grande</b></h3>
+            Arthur Felipe Silva Barbosa
+            Turma
+          </div>
+          <div class="cardFooter">
+            <div class="valor">R$123,45</div>
+            <button class="btnComprar">
+              Comprar
+            </button> 
+          </div> 
+      </div>-->
+    </div>
+  </section> 
+</div>
+<!-- /.content -->
+
+

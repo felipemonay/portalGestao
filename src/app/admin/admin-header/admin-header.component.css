@@ -1,0 +1,63 @@
+.logoT{
+    width: 90% !important;
+}
+
+.logoM{
+    width: 80% !important;
+    padding: 2px !important;
+}
+.logo-xs{
+    height: 40px !important;
+    padding-top: 10px !important;
+}
+
+.center{
+    margin-left: 20px
+
+}
+
+.btn-resp{
+    border-radius: 3px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid transparent !important;
+}
+
+.main-header{
+    top: 0; 
+    position: fixed;
+    width: 100%;
+}
+
+.alignBtn{
+    text-align: center;
+}
+
+a{
+    color: white;
+}
+
+.navbar{
+    padding: 0;
+    display: block;
+}
+
+.d-inline{
+    float: right;
+}
+
+.fa-lg{
+    padding-top: 15px;
+}
+
+.navbar-nav .nav-link{
+    padding-left: 30px;
+}
+
+.label{
+    vertical-align: super;
+}
+
+.center{
+    text-align: -webkit-center;
+}

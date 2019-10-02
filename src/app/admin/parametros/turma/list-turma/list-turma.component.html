@@ -1,0 +1,72 @@
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="card col-sm-12">
+      <div class="cardHeader">
+        <h3>Lista de Turmas
+          <i class="fas fa-plus fa-md direita" [routerLink]="['/admin/parametros/turma']"></i>
+        </h3>
+      </div>
+      <div class="cardBody">
+        <div>
+          <div class="row thead">
+            <div class="col-sm-2">Turma</div>
+            <div class="col-sm-4">Série</div>
+            <div class="col-sm-2">Capacidade</div>
+            <div class="col-sm-2">Data Inicial</div>
+            <div class="col-sm-2">Data Final</div>
+            <div class="col-sm-2">Inscritos</div>
+            <div class="col-sm-2">Confirmados</div>
+            <div class="col-sm-2">Meta de Ocupação</div>
+            <div class="col-sm-2">Turno</div>
+            <div class="col-sm-2">Vagas</div>
+            <div class="col-sm-2">Detalhes</div>
+          </div>
+          <div class="tbody">
+            <div class="row hoverRow" *ngFor="let turma of turmas">
+              <div class="col-sm-11" (click)="update(turma.idTurma)">
+                <div class="col-sm-1">
+                  <div>{{ turma.descricao }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.serie }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.capacidade }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.dataInicial }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.dataFinal }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.inscritos }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.confirmados }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.ocupacaoMeta }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.turno }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.vagas }}</div>
+                </div>
+                <div class="col-sm-1">
+                  <div>{{ turma.detalhes }}</div>
+                </div>
+              </div>
+              <div class="col-sm-1" right>
+                <button (click)="delete(turma.idTurma)">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+</div>

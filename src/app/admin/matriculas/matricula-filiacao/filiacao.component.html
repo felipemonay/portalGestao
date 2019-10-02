@@ -1,0 +1,395 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <app-etapa [pagina]="'filiacao'" class="hidden-sm" [idMatricula]="idMatricula" [navega]="navega"></app-etapa>
+  </section>
+  <section class="content">
+    <form [formGroup]="f" novalidate>
+      <div class="content ">
+        <h3 class="bordabaixo">Etapa 2/9 - Preencha os dados de filiação</h3>
+        <div class="submenu" >
+          <div formGroupName="mae">
+            <h4 class="bordabaixo required">Filiação 1</h4>
+            <div class="row topo" formGroupName="Documento">
+              <div class="col-sm-5">
+                <label class="required">CPF:</label>
+                <div  class="form-group has-feedback"  for="inputTextmaeDocumentoCPF" [ngClass]="aplicaCssErro('mae.Documento.cpf')">
+                  <input id="inputTextmaeDocumentoCPF" type="text" name="cpf" class="form-control" formControlName="cpf" mask="000.000.000-00" (blur)="consultaPessoaMaeCPF($event)" />
+                  <app-error-msg [control]="f.get('mae.Documento.cpf')" label="CPF"></app-error-msg>
+                </div>
+                <input-spinner *ngIf="spinnerCpfMae"></input-spinner>
+              </div>
+              <div class="col-sm-3">
+                <label class="required">RG:</label>
+                <div class="form-group has-feedback" for="inputTextmaeDocumentoRg" [ngClass]="aplicaCssErro('mae.Documento.rg')">
+                  <input type="text" name="rg" class="form-control" formControlName="rg" id="inputTextmaeDocumentoRg" mask="0{2}.0{3}.0{3}-A{2}" />
+                  <app-error-msg [control]="f.get('mae.Documento.rg')" label="RG"></app-error-msg>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <label class="required">Órgão Emissor:</label>
+                <div class="form-group has-feedback" for="inputTextmaeDocumentoOrgaoEmissor" [ngClass]="aplicaCssErro('mae.Documento.rgEmissor')">
+                  <select class="form-control" formControlName="rgEmissor" id="inputTextmaeDocumentoOrgaoEmissor">
+                    <option value>Selecione...</option>
+                    <option *ngFor="let item of listaOrgaosEmissores" [value]="item.idorgaoemissor">{{item.nome}}</option>
+                  </select>
+                  <app-error-msg [control]="f.get('mae.Documento.rgEmissor')" label="Emissor do RG"></app-error-msg>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="Basicos">
+              <div class="row">
+                <div class="col-sm-5">
+                  <label class="required">Nome:</label>
+                  <div class="form-group has-feedback " for="inputTextmaeNome" [ngClass]="aplicaCssErro('mae.Basicos.nome')">
+                    <input type="text" formControlName="nome" id="inputTextmaeNome" name="nome" class=" form-control" />
+                    <app-error-msg [control]="f.get('mae.Basicos.nome')" label="Nome"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Nascimento:</label>
+                  <div class="form-group has-feedback" for="inputTextmaeBasicosNascimento" [ngClass]="aplicaCssErro('mae.Basicos.dataNascimento')">
+                    <input type="text" name="dataNascimento" class="form-control" formControlName="dataNascimento" id="inputTextmaeBasicosNascimento" mask="00/00/0000" [dropSpecialCharacters]="false"/>
+                    <app-error-msg [control]="f.get('mae.Basicos.dataNascimento')" label="Data de Nascimento"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Identidade de gênero:</label>
+                  <div class="form-group has-feedback" for="inputSelectmaeBasicosIdentidadeGenero" [ngClass]="aplicaCssErro('mae.Basicos.sexo')">
+                    <select class="form-control" formControlName="sexo" id="inputSelectmaeBasicosIdentidadeGenero" >
+                      <option value>Selecione...</option>
+                      <option *ngFor="let tipoSexo of listaTipoSexos" [value]="tipoSexo.id"> {{tipoSexo.descricao}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('mae.Basicos.sexo')" label="Identidade de gênero"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <label class="required">Nacionalidade:</label>
+                  <div class="form-group has-feedback" for="inputTextBasicosidNacionalidade" [ngClass]="aplicaCssErro('mae.Basicos.idNacionalidade')">
+                    <select class="form-control" formControlName="idNacionalidade" id="inputTextBasicosidNacionalidade">
+                      <option value>Selecione...</option>
+                      <option *ngFor="let tipoNacionalidade of listaNacionalidades" [value]="tipoNacionalidade.idNacionalidade"> {{tipoNacionalidade.descricao}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('mae.Basicos.idNacionalidade')" label="Nacionalidade"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-5">
+                  <label class="required">E-mail:</label>
+                  <div class="form-group has-feedback " for="inputTextmaeBasicosEmail" [ngClass]="aplicaCssErro('mae.Basicos.email')">
+                    <input type="text" name="email" class=" form-control" formControlName="email" id="inputTextmaeBasicosEmail"/>
+                    <app-error-msg [control]="f.get('mae.Basicos.email')" label="E-mail"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label>Telefone Residencial:</label>
+                  <input type="text" name="telefonefixo" class="form-control" formControlName="telefonefixo" id="telefonefixo" mask="(00)0000-0000" />
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Telefone Celular:</label>
+                  <div class="form-group has-feedback" for="inputTextmaeBasicosTelefoneCelular" [ngClass]="aplicaCssErro('mae.Basicos.telefonecelular')">
+                    <input type="text" name="telefonecelular" class="form-control" formControlName="telefonecelular" id="inputTextmaeBasicosTelefoneCelular" mask="(00)00000-0000" />
+                    <app-error-msg [control]="f.get('mae.Basicos.telefonecelular')" label="Telefone celular"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <div class="row centro" formGroupName="Responsavel">
+              <div class="col-sm-4">
+                <label>Responsável Financeiro:</label>
+                <div class="control">
+                  <label class="radiobtn">
+                    <input  type="radio"  formControlName="financeiro"  id="financeiro"  [value]="1" (change)="changeRespFinanceiro($event,'mae')"/>
+                    Sim
+                  </label>
+                  <label class="radiobtn radioResp">
+                    <input type="radio" formControlName="financeiro" [value]="0" id="financeiro" (change)="changeRespFinanceiro($event,'mae')" />
+                    Não
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label>Responsável Pedagogico:</label>
+                <div class="control">
+                  <label class="radiobtn">
+                    <input type="radio" formControlName="pedagogico" id="pedagogico" [value]="1" (change)="changeRespPedagogico($event,'mae')"/>
+                    Sim
+                  </label>
+                  <label class="radiobtn radioResp">
+                    <input type="radio" formControlName="pedagogico" [value]="0" id="pedagogico" (change)="changeRespPedagogico($event,'mae')" />
+                    Não
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="Endereco">
+              <h4 class="bordabaixo">Endereço</h4>
+              <div class="row topo">
+                <div class="col-sm-3">
+                  <label class="required">CEP:</label>
+                  <div class="form-group has-feedback" for="inputTextmaeEnderecoCep" [ngClass]="aplicaCssErro('mae.Endereco.cep')">
+                    <input type="text" name="cep" class="form-control" formControlName="cep" id="inputTextmaeEnderecoCep" mask="00000-000" (blur)="consultaCEPMae(($event).target.value)" />
+                    <app-error-msg [control]="f.get('mae.Endereco.cep')" label="CEP"></app-error-msg>
+                  </div>
+                  <input-spinner *ngIf="spinnerCepMae"></input-spinner>
+                </div>
+                <div class="col-sm-6">
+                  <label class="required">Logradouro:</label>
+                  <div class="form-group has-feedback " for="inputTextmaeEnderecoLogradouro" [ngClass]="aplicaCssErro('mae.Endereco.logradouro')">
+                    <input type="text" name="logradouro" class="form-control" formControlName="logradouro" id="inputTextmaeEnderecoLogradouro" [attr.disabled]="possuiCepMae" />
+                    <app-error-msg [control]="f.get('mae.Endereco.logradouro')" label="Logradouro"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <label class="required">Número:</label>
+                  <div class="form-group has-feedback" for="inputTextmaeEnderecoNumero" [ngClass]="aplicaCssErro('mae.Endereco.numero')">
+                    <input type="text" name="numero" class="form-control" formControlName="numero" id="inputTextmaeEnderecoNumero" />
+                    <app-error-msg [control]="f.get('mae.Endereco.numero')" label="Número"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label>Complemento:</label>
+                  <input type="text" name="complemento" class="form-control" formControlName="complemento" id="complemento" />
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Bairro:</label>
+                  <div class="form-group has-feedback" for="inputTextmaeEnderecoBairro" [ngClass]="aplicaCssErro('mae.Endereco.bairro')">
+                    <input type="text" name="bairro" class="form-control" formControlName="bairro" id="inputTextmaeEnderecoBairro" [attr.disabled]="possuiCepMae" />
+                    <app-error-msg [control]="f.get('mae.Endereco.bairro')" label="Bairro"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-3">
+                  <label class="required">UF:</label>
+                  <div class="form-group has-feedback"  for="inputTextmaeEnderecoidUf" [ngClass]="aplicaCssErro('mae.Endereco.idUf')" >
+                    <select class="form-control" formControlName="idUf"  [attr.disabled]="possuiCepMae" (change)="onChangeCidade(($event).target.value)"  id="inputTextAlunoEnderecoUf">
+                      <option value>Selecione...</option>
+                      <option *ngFor="let item of listaEstados" [value]="item.idUf"> {{item.nome}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('mae.Endereco.idUf')" label="UF"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="required">Cidade:</label>
+                  <div class="form-group has-feedback" for="inputTextmaeEnderecoidCidade" [ngClass]="aplicaCssErro('mae.Endereco.idCidade')">
+                    <select class="form-control" formControlName="idCidade" [attr.disabled]="possuiCepMae" id="inputTextAlunoEnderecoidCidade">
+                      <option value>Selecione...</option>
+                      <option *ngFor="let item of listaCidades" [value]="item.idCidade"> {{item.nome}}</option>1
+                    </select>
+                    <app-error-msg [control]="f.get('mae.Endereco.idCidade')" label="Cidade"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+          <div class="topo" formGroupName="pai">
+            <h4 class="bordabaixo">Filiação 2</h4>
+            <div class="row topo">
+              <div class="col-sm-12">
+                <label style="font-weight: 400;display: flex;"><input type="checkbox" (click)="hide($event)" [checked]="!statusPai" />
+                Não quero declarar segunda filiação estando de acordo com as responsabilidades financeiras e pedagógicas envolvidas.</label>
+              </div>
+            </div>
+            <div *ngIf="statusPai">
+              <div class="row topo " formGroupName="Documento">
+                <div class="col-sm-5">
+                  <label class="required">CPF:</label>
+                  <div class="form-group has-feedback" for="inputTextpaiDocumentoCPF" [ngClass]="aplicaCssErro('pai.Documento.cpf')">
+                    <input id="inputTextpaiDocumentoCPF" mask="000.000.000-00" type="text" name="cpf" class="form-control" formControlName="cpf" (blur)="consultaPessoaPaiCPF($event)" />
+                    <app-error-msg [control]="f.get('pai.Documento.cpf')" label="CPF"></app-error-msg>
+                  </div>
+                  <input-spinner *ngIf="spinnerCpfPai"></input-spinner>
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">RG:</label>
+                  <div class="form-group has-feedback" for="inputTextpaiDocumentoRg" [ngClass]="aplicaCssErro('pai.Documento.rg')">
+                    <input type="text" name="rg" class="form-control" formControlName="rg" id="inputTextpaiDocumentoRg" mask="0{2}.0{3}.0{3}-A{2}" />
+                    <app-error-msg [control]="f.get('pai.Documento.rg')" label="RG"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Órgão Emissor:</label>
+                  <div class="form-group has-feedback" for="inputTextpaiDocumentoOrgaoEmissor" [ngClass]="aplicaCssErro('pai.Documento.rgEmissor')" >
+                    <select class="form-control" formControlName="rgEmissor" id="inputTextpaiDocumentoOrgaoEmissor">
+                      <option value>Selecione...</option>
+                      <option *ngFor="let item of listaOrgaosEmissores" [value]="item.idorgaoemissor">{{item.nome}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('pai.Documento.rgEmissor')" label="Emissor do RG"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              <div class="row" formGroupName="Basicos">
+                <div class="col-sm-5">
+                  <label class="required">Nome:</label>
+                  <div class="form-group has-feedback " for="inputTextpaiNome" [ngClass]="aplicaCssErro('pai.Basicos.nome')" >
+                    <input type="text" formControlName="nome" id="inputTextpaiNome" name="nome" class=" form-control" />
+                    <app-error-msg [control]="f.get('pai.Basicos.nome')" label="Nome"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Nascimento:</label>
+                  <div class="form-group has-feedback" for="inputTextpaiBasicosNascimento" [ngClass]="aplicaCssErro('pai.Basicos.dataNascimento')">
+                    <input type="text" name="dataNascimento" class="form-control" formControlName="dataNascimento" id="inputTextpaiBasicosNascimento" mask="00/00/0000" [dropSpecialCharacters]="false" />
+                    <app-error-msg [control]="f.get('pai.Basicos.dataNascimento')" label="Data nascimento"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Identidade de gênero:</label>
+                  <div class="form-group has-feedback" for="inputSelectpaiBasicosIdentidadeGenero" [ngClass]="aplicaCssErro('pai.Basicos.sexo')">
+                    <select class="form-control" formControlName="sexo" id="inputSelectpaiBasicosIdentidadeGenero" >
+                      <option value>Selecione...</option>
+                      <option *ngFor="let tipoSexo of listaTipoSexos" [value]="tipoSexo.id"> {{tipoSexo.descricao}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('pai.Basicos.sexo')" label="Identidade de gênero"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <label class="required">Nacionalidade:</label>
+                  <div class="form-group has-feedback" for="inputTextBasicosidNacionalidade" [ngClass]="aplicaCssErro('pai.Basicos.idNacionalidade')">
+                    <select class="form-control" formControlName="idNacionalidade" id="inputTextBasicosidNacionalidade" >
+                      <option value>Selecione...</option>
+                      <option *ngFor="let tipoNacionalidade of listaNacionalidades" [value]="tipoNacionalidade.idNacionalidade"> {{tipoNacionalidade.descricao}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('pai.Basicos.idNacionalidade')" label="Nacionalidade"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              <div class="row" formGroupName="Basicos">
+                <div class="col-sm-5">
+                  <label class="required">E-mail:</label>
+                  <div class="form-group has-feedback " for="inputTextpaiBasicosEmail" [ngClass]="aplicaCssErro('pai.Basicos.email')" >
+                    <input type="text" name="email" class=" form-control" formControlName="email" id="inputTextpaiBasicosEmail" />
+                    <app-error-msg [control]="f.get('pai.Basicos.email')" label="E-mail"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label>Telefone Residencial:</label>
+                  <input type="text" name="telefonefixo" class="form-control" formControlName="telefonefixo" id="telefonefixo" mask="(00)0000-0000" />
+                </div>
+                <div class="col-sm-3">
+                  <label class="required">Telefone Celular:</label>
+                  <div class="form-group has-feedback"  for="inputTextpaiBasicosTelefoneCelular" [ngClass]="aplicaCssErro('pai.Basicos.telefonecelular')" >
+                    <input type="text" name="telefonecelular" class="form-control" formControlName="telefonecelular" id="inputTextpaiBasicosTelefoneCelular" mask="(00)00000-0000" />
+                    <app-error-msg [control]="f.get('pai.Basicos.telefonecelular')" label="Telefone celular"></app-error-msg>
+                  </div>
+                </div>
+              </div>
+              <div class="row centro" formGroupName="Responsavel">
+                <div class="col-sm-4">
+                  <label>Responsável Financeiro:</label>
+                  <div class="control">
+                    <label class="radiobtn">
+                      <input type="radio" formControlName="financeiro" id="financeiro" [value]="1" (change)="changeRespFinanceiro($event, 'pai')"/>
+                      Sim
+                    </label>
+                    <label class="radiobtn radioResp">
+                      <input type="radio" formControlName="financeiro" [value]="0" id="financeiro" (change)="changeRespFinanceiro($event,'pai')" />
+                      Não
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label>Responsável Pedagogico:</label>
+                  <div class="control">
+                    <label class="radiobtn">
+                      <input type="radio" formControlName="pedagogico" id="pedagogico" [value]="1" (change)="changeRespPedagogico($event,'pai')" />
+                      Sim
+                    </label>
+                    <label class="radiobtn radioResp"> 
+                      <input type="radio" formControlName="pedagogico" [value]="0" id="pedagogico" checked  (change)="changeRespPedagogico($event,'pai')" />
+                      Não
+                    </label>
+                  </div>
+                </div> 
+              </div>
+              <h4 class="bordabaixo">Endereço</h4>
+              <div formGroupName="Endereco">
+                <div class="row topo">
+                  <div class="col-sm-3">
+                    <label class="required">CEP:</label>
+                    <div class="form-group has-feedback" for="inputTextpaiEnderecoCep" [ngClass]="aplicaCssErro('pai.Endereco.cep')" >
+                      <input type="text" name="cep" class="form-control" formControlName="cep" id="inputTextpaiEnderecoCep" mask="00000-000" (blur)="consultaCEPPai(($event).target.value)" />
+                      <app-error-msg [control]="f.get('pai.Endereco.cep')" label="CEP"></app-error-msg>
+                    </div>
+                    <input-spinner *ngIf="spinnerCepPai"></input-spinner>
+                  </div>
+                  <div class="col-sm-5">
+                    <label class="required">Logradouro:</label>
+                    <div class="form-group has-feedback " for="inputTextpaiEnderecoLogradouro" [ngClass]="aplicaCssErro('pai.Endereco.logradouro')" >
+                      <input type="text" name="logradouro" class=" form-control" formControlName="logradouro" id="inputTextpaiEnderecoLogradouro" [attr.disabled]="possuiCepPai" />
+                      <app-error-msg [control]="f.get('pai.Endereco.logradouro')" label="Logradouro"></app-error-msg>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label class="required">Número:</label>
+                    <div class="form-group has-feedback" for="inputTextpaiEnderecoNumero" [ngClass]="aplicaCssErro('pai.Endereco.numero')" >
+                      <input type="text" name="numero" class="form-control" formControlName="numero" id="inputTextpaiEnderecoNumero" />
+                      <app-error-msg [control]="f.get('pai.Endereco.numero')" label="Número"></app-error-msg>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <label>Complemento:</label> 
+                    <input type="text" name="complemento" class="form-control" formControlName="complemento" id="complemento" />
+                  </div>
+                  <div class="col-sm-3">
+                    <label class="required">Bairro:</label>
+                    <div class="form-group has-feedback" for="inputTextpaiEnderecoBairro" [ngClass]="aplicaCssErro('pai.Endereco.bairro')" >
+                      <input type="text" name="bairro" class="form-control" formControlName="bairro" id="inputTextpaiEnderecoBairro" [attr.disabled]="possuiCepPai" />
+                      <app-error-msg [control]="f.get('pai.Endereco.bairro')" label="Bairro"></app-error-msg>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-3">
+                  <label class="required">UF:</label>
+                  <div class="form-group has-feedback"  for="inputTextpaiEnderecoidUf" [ngClass]="aplicaCssErro('pai.Endereco.idUf')">
+                    <select class="form-control" formControlName="idUf" [attr.disabled]="possuiCepPai" (change)="onChangeCidade(($event).target.value)"  id="inputTextAlunoEnderecoUf">
+                      <option value>Selecione...</option>
+                      <option *ngFor="let item of listaEstados" [value]="item.idUf"> {{item.nome}}</option>
+                    </select>
+                    <app-error-msg [control]="f.get('pai.Endereco.idUf')" label="UF"></app-error-msg>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="required">Cidade:</label>
+                  <div class="form-group has-feedback" for="inputTextpaiEnderecoidCidade" [ngClass]="aplicaCssErro('pai.Endereco.idCidade')" >
+                    <select class="form-control" formControlName="idCidade" [attr.disabled]="possuiCepPai" id="inputTextAlunoEnderecoidCidade">
+                      <option value>Selecione...</option>
+                      <option *ngFor="let item of listaCidades" [value]="item.idCidade"> {{item.nome}}</option>1
+                    </select>
+                    <app-error-msg [control]="f.get('pai.Endereco.idCidade')" label="Cidade"></app-error-msg>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div *ngIf="!statusPai">
+              <input type="checkbox" />
+              Disclaimer legalmente o aluno possui apenas uma filiação.
+            </div> -->
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-prox" id="proximo-btn" name="proximo" type="submit" (click)="validaResp()" [disabled]="(formStatus)" >
+            Próximo
+          </button>
+          <button class="btn btn-prox" id="voltar-btn" name="voltar" type="button" (click)="backClicked()"  >
+            Voltar
+          </button>
+          <button class="btn integra" type="submit" (click)="integra('integra')" *ngIf="navega" [disabled]="(formStatus)">Atualizar</button>
+        </div>
+      </div>
+    </form>
+    <!-- <app-form-debug [form]="f"></app-form-debug>  -->
+  </section>
+</div>
+

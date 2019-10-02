@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+      <div class="card col-sm-12">
+          <div class="cardHeader">
+              <h3 *ngIf="idSituacao==='1'">Lista de Matriculas Ativas</h3>
+              <h3 *ngIf="idSituacao==='10'">Lista de Rematriculas Pendentes</h3>
+              <h3 *ngIf="idSituacao==='12'">Lista de Matriculas incompletas</h3>
+          </div>
+          <div class="cardBody">
+            <div class="col-sm-6">
+              <label>Unidade</label>
+              <select  [(ngModel)]="unidade" class="form-control" (change)="filtraAluno()">
+                <option *ngFor="let item of listaUnidades" [value]="item.idUnidade"> {{item.descricao}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label>Período letivo</label>
+              <select  [(ngModel)]="periodoLetivo" class="form-control" (change)="filtraAluno()">
+                <option *ngFor="let item of listaPeriodoLetivo" [value]="item.idPeriodoLetivo"> {{item.descricao}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-3">
+              <label>Serie</label>
+              <select  [(ngModel)]="serie" class="form-control" (change)="filtraAluno()" >
+                <option value>Selecione...</option>
+                <option *ngFor="let item of listaSeries" [value]="item.idSerie"> {{item.descricao}}</option>
+              </select>              
+            </div>
+            <div class="col-sm-3">
+              <label>Turma</label>
+              <select [(ngModel)]="turma" class="form-control" (change)="filtraAluno()" >
+                <option value>Selecione...</option>
+                <option *ngFor="let item of listaTurmas" [value]="item.idTurma"> {{item.descricao}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label>Aluno</label>
+              <input class="form-control"  [(ngModel)]="nome" type="search"  placeholder="Buscar..." (keyup)="debounce.next($event.target.value)" />
+            </div>
+          </div>
+      </div>
+      <div class="card col-sm-12">
+          <div class="cardHeader">
+              <h3>Lista de rematriculas
+              <i class="fas fa-user-plus fa-md direita" [routerLink]="['/admin/matricula/novaMatricula']"></i>
+              </h3>
+          </div>
+          <div class="cardBody">
+              <table  class="row-border hover" width=100% >
+                  <thead>
+                    <tr>
+                        <th class="col-sm-6 text-left">Alunos</th>
+                        <!-- <th class="col-sm-2">Unidade</th>
+                        <th class="col-sm-2">Período Letivo</th>
+                        <th class="col-sm-2">Serie</th>
+                        <th class="col-sm-2">Turma</th> -->
+                        <th class="col-sm-6">Ações</th>
+                        <!-- <th class="col-sm-2">Rematricular</th>
+                        <th class="col-sm-2">Loja</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let aluno of pesquisaRematricula">
+                      <td class="col-sm-6 text-left">
+                        <h4><b>{{ aluno.nomeAluno | titlecase}}</b></h4>
+                        <p>
+                          Unidade: {{ aluno.nomeUnidade }}
+                          Período Letivo: {{ aluno.nomePeridoletivo }}
+                        </p>
+                        <p>
+                          Série: {{ aluno.nomeSerie }}
+                          Turma: {{ aluno.nomeTurma }}
+                        </p>
+                      </td>
+                      <td class="col-sm-6 text-center">
+                        <consulta-matricula *ngIf="idSituacao==='1'"    [aluno]="aluno"></consulta-matricula>
+                        <rematricula *ngIf="idSituacao==='10'"          [aluno]="aluno"></rematricula>
+                        <matriculas-pendentes *ngIf="idSituacao==='12'" [aluno]="aluno"></matriculas-pendentes>
+                        <erros-integracao *ngIf="idSituacao==='14'" [aluno]="aluno"></erros-integracao>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+      </div>
+  </section> 
+</div>

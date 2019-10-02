@@ -1,0 +1,59 @@
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel ">
+      <div class="pull-left image">
+        <img src="assets/img/DEC7.png" class="img-circle" alt="Unidade">
+      </div>
+      <div class="pull-left info text-center">
+        <p>Colégio</p>
+        <small>2019</small>
+      </div>
+    </div>
+    <!-- search form -->
+    <!--
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Procurar...">
+        <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+      </div>
+    </form>
+  -->
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="header">Menu</li>
+      <li class="active treeview">
+        <a href="#">
+          <i class="fa fa-files-o"></i> <span>Matrículas</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a [routerLink]="['/admin/matricula/novaMatricula']"><i class="fa fa-circle-o"></i>Novas Matrículas</a></li>
+          <li><a [routerLink]="['/admin/matricula/pesquisaMatricula', 10]"><i class="fa fa-circle-o"></i>Rematrículas</a></li>
+          <li><a [routerLink]="['/admin/matricula/pesquisaMatricula', 1]"><i class="fa fa-circle-o"></i>Consulta Matrículas</a></li>
+          <li><a [routerLink]="['/admin/matricula/pesquisaMatricula', 12]"><i class="fa fa-circle-o"></i>Matrículas pendentes</a></li>
+          <li><a [routerLink]="['/admin/matricula/pesquisaMatricula', 14]"><i class="fa fa-circle-o"></i>Erros de integração</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" [routerLink]="['/admin/dashboard2']">
+          <i class="fa fa-dashboard"></i> <span>Acompanhamento Meta</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="#" [routerLink]="['/admin/boletos']">
+          <i class="fa fa-dollar"></i> <span>Financeiro</span>
+        </a>
+      </li> -->
+    
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

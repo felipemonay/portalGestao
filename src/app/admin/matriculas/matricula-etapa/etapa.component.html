@@ -1,0 +1,8 @@
+<section class="content-header">
+    <div class='tabs hidden-xs hidden-sm'>
+        <div class="tab"  *ngFor="let item of etapas" (click)="etapaNavega(item.path)">
+            <img  src="{{item.src}}">
+            <p [ngClass]="{'active': item.isSelect}">{{item.label}}</p>
+        </div>
+    </div>
+</section>

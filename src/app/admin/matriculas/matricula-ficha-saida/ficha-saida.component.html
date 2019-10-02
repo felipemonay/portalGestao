@@ -1,0 +1,131 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <app-etapa [pagina]="'fichaSaida'" [idMatricula]="idMatricula" [navega]="navega"></app-etapa>
+    </section>
+    <section class="content">
+        <form [formGroup]="f" novalidate>
+            <div class="content ">
+                <h3 class="bordabaixo">Etapa 6/9 - Preencha a autorização de saída</h3>
+                <div class="submenu">
+                    Válidos somente para alunos do 6º ano à 3ª série do Ensino médio. Para os demais alunos, saída somente acompanhado.
+                    <div formGroupName="autorizacaoSaida">
+                        <div class="row topo">  
+                            <div class="control">
+                                <div class="col-sm-12">
+                                    <label class="radiobtn">
+                                        <input type="radio" formControlName="idTipoAutorizacaoSaida"  [value]="1" (click)="hideAll()"> Verde - O aluno está autorizado a sair sozinho ao término das aulas, provas e simulados.
+                                    </label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="radiobtn">
+                                        <input type="radio" formControlName="idTipoAutorizacaoSaida" [value]="2" (click)="hideRetirar()"> Amarelo - O aluno está autorizado a sair sozinho, desde que o responsável comunique através do portal da família.
+                                    </label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="radiobtn">
+                                        <input type="radio" formControlName="idTipoAutorizacaoSaida" [value]="3" (click)="hideRetirar()"> Vermelho - O aluno não poderá sair sozinho em nenhum momento.
+                                    </label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label class="radiobtn">
+                                        <input type="radio" formControlName="idTipoAutorizacaoSaida" [value]="4" (click)="hideTransporte()"> Azul - O aluno irá de transporte escolar.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                            <div [(ngClass)]="retirar">
+                                <h4 class="bordabaixo">Pessoas autorizadas a retirar o aluno:</h4>
+                                <div class="row topo">
+                                    <div class="col-sm-12">
+                                        <label> 
+                                            <input type="checkbox" formControlName="mae" id="Mae" name="Mae" value="1"> Filiação 1
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label> 
+                                            <input type="checkbox" formControlName="pai" id="Pai" name="Pai" value="1"> Filiação 2
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12"> 
+                                        <label>
+                                            <input type="checkbox" formControlName="responsavelFinanceiro" id="responsavelFinanceiro" name="responsavelFinanceiro" value="1"> Responsável Financeiro
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label> 
+                                            <input type="checkbox" formControlName="responsavelPedagogico" id="responsavelPedagogico" name="responsavelPedagogico" value="1"> Responsável Pedagógico
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label> 
+                                            <input type="checkbox" formControlName="outros" id="outros" name="outros" value="1" (click)="hideOutros()"> Outros
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                        <div [(ngClass)]="outros" formGroupName="autorizacaoRetirarAluno">
+                            <h4 class="bordabaixo">Adicionar outros</h4>
+                            <div class="row topo">
+                                <div class="col-sm-6"> 
+                                    <label class="required">Nome completo:</label>
+                                    <input type="text" name="nome" class="form-control" id="nome" formControlName="nome">
+                                </div>
+                                <div class="col-sm-4">   
+                                    <label class="required">CPF:</label>
+                                    <input type="text" name="cpf" id="cpf" class="form-control" mask="000.000.000-00" formControlName="cpf">
+                                </div>
+                            </div>
+                            <div class="row interno">
+                                <div class="col-sm-4">   
+                                    <label class="required">Parentesco:</label>
+                                    <input type="text" name="parentesco" class="form-control" id="parenteco" formControlName="parentesco">
+                                </div>
+                                <div class="col-sm-4">   
+                                    <label>Telefone Residencial:</label>
+                                    <input type="text" name="telRes" id="telRes" class="form-control" mask="(00)0000-0000" formControlName="telefoneResidencial">
+                                </div>
+                                <div class="col-sm-4">   
+                                    <label class="required">Telefone Celular:</label>
+                                    <input type="text" name="telCel" id="telCel" class="form-control" mask="(00)00000-0000" formControlName="telefoneCelular">
+                                </div>
+                            </div>
+                        </div>
+                        <div [(ngClass)]="transporte" formGroupName="transporteEscolar">
+                            <div class="row topo">
+                                <div class="col-sm-4">
+                                    <label>Nome do condutor:</label>
+                                    <input type="text" name="nomeCondutor" class="form-control" formControlName="nomeCondutor">
+                                </div>
+                                <div class="col-sm-3">   
+                                    <label>Telefone:</label>
+                                    <input type="text" name="telefoneCondutor" class="form-control" formControlName="telefoneCondutor" mask="(00)00009-0000">
+                                </div>
+                            </div>
+                        </div>
+                    <h4 class="bordabaixo">Utilização de vale transporte:</h4>
+                    <div class="row topo" formGroupName="valeTransporte">
+                        <div class="col-sm-12"> 
+                            <label>
+                                <input type="checkbox" [value]="1" name="sptrans" formControlName="sptrans" (click)="solicitar($event)"> SPTrans
+                            </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <label> 
+                                <input type="checkbox" [value]="1" name="bom" formControlName="bom" (click)="solicitar($event)"> Cartão Bom
+                            </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <label> 
+                                <input type="checkbox" [value]="1" name="naoSolicitado" formControlName="naoSolicitado" (click)="solicitar($event)"> Não desejo solicitar
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-prox" id="proximo-btn" name="proximo" type="submit" (click)="onSubmit('../fichaTransporte')">Próximo</button>
+            <button class="btn btn-prox" id="voltar-btn" name="voltar" type="submit" (click)="backClicked()">Voltar</button>
+            <button class="btn integra" type="submit" (click)="integra('integra')" *ngIf="navega" [disabled]="(formStatus)">Atualizar</button>
+        </form>
+    </section>
+</div>

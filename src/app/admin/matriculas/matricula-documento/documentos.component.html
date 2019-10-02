@@ -1,0 +1,85 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <app-etapa [pagina]="'documentos'" [idMatricula]="idMatricula" [navega]="navega"></app-etapa>
+    </section>
+    <section class="content">          
+        <form [formGroup]="f" novalidate>
+            <div class="content" formGroupName="documentos">
+                <h3 class="bordabaixo">Etapa 7/9 - Anexe os documentos solicitados</h3>
+                <h4 class="bordabaixo">Documentos do aluno:</h4>
+                <div class="card" *ngIf="this.documentos.docAluno.length" >
+                    <!-- <div class="card-header">
+                        Documentos do aluno:
+                    </div> -->
+                    <div class="list-group" >
+                        <div class="list-group-item" style="min-height:40px" *ngFor="let documento of documentos.docAluno;let i = index;" [formGroupName]="i">
+                            <i class="fas fa-times-circle text-danger" *ngIf="(!documento.documentoEntregue)"></i>
+                            <i class="fas fa-check-circle text-success" *ngIf="(documento.documentoEntregue)"></i>
+                            <div class="col-sm-6">
+                                {{documento.descricao}}<span style="color:red" *ngIf="documento.obrigatorio">*</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <input *ngIf="documento.validade" mask="00/00/0000" [dropSpecialCharacters]="false" type="text" class="form-control"  placeholder="Validade" formControlName="validadedocumento"  />
+                            </div>
+                            <div class="col-sm-3">
+                                <input-file [image]="documento.documentoEntregue?.imageBase64" placeholder="" (select)="selectedFile($event,i)"></input-file>
+                                <input type="hidden" formControlName="urldocumento" [value]="documento.documentoEntregue?.imageBase64">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" *ngIf="!this.documentos.docAluno.length">
+                    <!-- <div class="card-header">
+                        Documentos do Aluno:
+                    </div> -->
+                    <div class="list-group" >
+                        <div class="list-group-item">
+                            <div class="col-sm-12">
+                                <span>Não são requeridos documentos do aluno!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="bordabaixo">Documentos do responsável:</h4>
+                <div class="card" *ngIf="this.documentos.docResponsavel.length">
+                    <!-- <div class="card-header">
+                        Documentos do responsável:
+                    </div> -->
+                    <div class="list-group" >
+                        <div class="list-group-item" style="min-height:40px" *ngFor="let documento of documentos.docResponsavel;let i = index;" [formGroupName]="i">
+                            <i class="fas fa-times-circle text-danger" *ngIf="(!documento.documentoEntregue)"></i>
+                            <i class="fas fa-check-circle text-success" *ngIf="(documento.documentoEntregue)"></i>
+                            <div class="col-sm-6">
+                                {{documento.descricao}}<span style="color:red" *ngIf="documento.obrigatorio">*</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <input *ngIf="documento.validade" mask="00/00/0000" [dropSpecialCharacters]="false" type="text" class="form-control"  placeholder="Validade" formControlName="validadedocumento"  />
+                            </div>
+                            <div class="col-sm-3">
+                                <input-file [image]="documento.documentoEntregue?.imageBase64" placeholder="" (select)="selectedFileResp($event,i)"></input-file>
+                                <input type="hidden" formControlName="urldocumento" [value]="documento.documentoEntregue?.imageBase64">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" *ngIf="!this.documentos.docResponsavel.length">
+                    <!-- <div class="card-header">
+                        Documentos do responsável:
+                    </div> -->
+                    <div class="list-group" >
+                        <div class="list-group-item">
+                            <div class="col-sm-12">
+                                <span>Não são requeridos documentos do responsável!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class="btn btn-prox" id="proximo-btn" name="proximo" type="submit" (click)="onSubmit('planoPagamento')">Próximo</button>
+            <button class="btn btn-volta" id="voltar-btn" name="voltar" type="submit" (click)="backClicked()">Voltar</button>
+            <button class="btn integra" type="submit" (click)="integra('integra')" *ngIf="navega" [disabled]="(formStatus)">Atualizar</button>
+        </form>
+    </section> 
+    <!-- <app-form-debug [form]="f"></app-form-debug>  -->
+</div>

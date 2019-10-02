@@ -1,0 +1,124 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <app-etapa [pagina]="'fichaSaude'" [idMatricula]="idMatricula" [navega]="navega"></app-etapa>
+    </section>
+    <section class="content">
+      <form [formGroup]="f" novalidate>
+        <div class="content  ">
+          <h3 class="bordabaixo">Etapa 5/9 - Preencha a ficha de saúde do aluno</h3>
+          <div class="submenu" formGroupName="fichaSaude">
+            <h4 class="bordabaixo">
+              Selecione os casos que se aplicam:
+            </h4>
+            <div class="row topo">
+              <div class="col-sm-3">
+                <label class="required">Tipo sanguíneo:</label>
+                <div class="form-group has-feedback" for="inputTextEnderecoCep" [ngClass]="aplicaCssErro('fichaSaude.tipoSanguineo')" >
+                  <select id="tipoSanguineo" formControlName="tipoSanguineo" class="form-control" >
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let tipoSanguineo of listaTipoSanguineo" [value]="tipoSanguineo.id"> {{tipoSanguineo.descricao}}</option>
+                  </select>
+                  <app-error-msg [control]="f.get('fichaSaude.tipoSanguineo')" label="Tipo sanguíneo"></app-error-msg>
+                </div>
+              </div>
+            </div>
+            <div class="row topo">
+              <div class="col-sm-12">
+                O aluno: <br /><br />
+                <input type="checkbox" id="possuiPlanoSaude" name="possuiPlanoSaude" formControlName="possuiPlanoSaude" value=1 (click)="hidePlano()" />
+                Possui plano de saúde?
+              </div>
+            </div>
+            <div [ngClass]="statusPlano">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label>Nome do plano de saúde:</label><br>
+                  <div class="col-sm-7">
+                    <input type="text" placeholder="Ex: Amil, SulAmerica, Bradesco, etc..." formControlName="nomePlanoSaude" id="nomePlanoSaude" class="form-control" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row interno">
+              <div class="col-sm-12">
+                <input type="checkbox" id="possuiNecessidadeEspecial" name="possuiNecessidadeEspecial" value="1" formControlName="possuiNecessidadeEspecial" (click)="hideNecessidade()" />
+                É portador de necessidade especiais?
+              </div>
+            </div>
+            <div [(ngClass)]="statusNecessidade">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label>De quais necessidades especiais o aluno é portador?</label><br>
+                  <div class="col-sm-7">
+                    <input type="text" name="nomeNecessidadeEspecial" class="form-control" formControlName="nomeNecessidadeEspecial" id="nomeNecessidadeEspecial" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row interno">
+              <div class="col-sm-12">
+                <input type="checkbox" id="possuiAlergiaMedicamento" name="possuiAlergiaMedicamento" value="1" formControlName="possuiAlergiaMedicamento" (click)="hideAlergico()" />
+                É alergico a medicamentos?
+              </div>
+            </div>
+            <div [ngClass]="statusAlergico">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label>Quais?</label><br>
+                  <div class="col-sm-7">
+                    <input type="text" name="nomeAlergiaMedicamento" class="form-control" formControlName="nomeAlergiaMedicamento" id="nomeAlergiaMedicamento" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row interno">
+              <div class="col-sm-12">
+                <input type="checkbox" id="realizaTratamentoMedico" name="realizaTratamentoMedico" formControlName="realizaTratamentoMedico" value="1" (click)="hideTratamento()" />
+                Está realizando tratamento médico no momento?
+              </div>
+            </div>
+            <div [(ngClass)]="statusTratamento">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label>Qual?</label><br>
+                  <div class="col-sm-7">
+                    <input type="text" name="nomeTratamentoMedico" class="form-control" formControlName="nomeTratamentoMedico" id="nomeTratamentoMedico" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row interno">
+              <div class="col-sm-12">
+                <input type="checkbox" id="possuiMedicacaoRegular" name="possuiMedicacaoRegular"  formControlName="possuiMedicacaoRegular" value="1" (click)="hideMedicacao()" />
+                Faz uso de medicação regular?
+              </div>
+            </div>
+            <div [(ngClass)]="statusMedicacao">
+              <div class="row">
+                <div class="col-sm-12">
+                  <label>Qual?</label><br>
+                  <div class="col-sm-7">
+                    <input type="text" name="nomeMedicacaoRegular" class="form-control" formControlName="nomeMedicacaoRegular" id="nomeMedicacaoRegular" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 topo">
+                <label>Existe alguma informação relevante quanto às condições de
+                  saúde do aluno que o colégio deva conhecer?</label><br>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" formControlName="informacaoAdicional" id="informacaoAdicional" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-prox" id="proximo-btn" name="proximo" type="submit" (click)="onSubmit()" [disabled]="formStatus" > Próximo </button>
+        <button class="btn btn-prox" id="voltar-btn" name="voltar" type="submit" (click)="backClicked()" >Voltar</button>
+        <button class="btn integra" type="submit" (click)="integra('integra')" *ngIf="navega" [disabled]="(formStatus)">Atualizar</button>
+      </form>
+    </section>
+        <!-- <app-form-debug [form]="f"></app-form-debug> -->
+  </div>
+  

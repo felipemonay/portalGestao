@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  <section class="content">
+    <div class="card col-sm-12">
+      <div class="cardHeader">
+        <h3>Lista de Turnos
+          <i class="fas fa-plus fa-md direita" [routerLink]="['/admin/parametros/turno']"></i>
+        </h3>
+      </div>
+      <div class="cardBody">
+        <div>
+          <div class="row thead">
+            <div class="col-sm-4">Descrição</div>
+            <div class="col-sm-2">Sigla</div>
+            <div class="col-sm-2">Resumo</div>
+            <div class="col-sm-2">Opções</div>
+          </div>
+          <div class="tbody">
+            <div class="row hoverRow" *ngFor="let turno of turnos">
+              <div class="col-sm-4" (click)="update(turno.idTurno)">
+                <div>{{ turno.descricao }}</div>
+              </div>
+              <div class="col-sm-2" (click)="update(turno.idTurno)">
+                <div>{{ turno.sigla }}</div>
+              </div>
+              <div class="col-sm-2" (click)="update(turno.idTurno)">
+                <div>{{ turno.resumo }}</div>
+              </div>
+              <div class="col-sm-2" right>
+                <button (click)="delete(turno.idTurno)">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+</div>

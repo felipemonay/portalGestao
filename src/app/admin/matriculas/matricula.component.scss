@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Chivo');
+
+// h3{
+//   margin-bottom: 0 !important;
+// }
+
+.required:after {
+  content:" *" !important; 
+  color: red !important;
+}
+
+// .etapa li{
+//     display: inline;
+// }
+
+// .content{
+//   padding: 0px 30px 0px 30px;
+// }
+
+// div.label1{
+//   width: 330px;
+// }
+
+// div.label2{
+//   width: 180px;
+// }
+
+// .label1{
+//     width: 300px;
+//     height: 25px;
+// }
+
+// .label2{
+//     width: 150px;
+//     height: 25px;
+// }
+
+.interno{
+  padding-top: 20px !important;
+}
+
+.bordabaixo{
+  margin: 20px 0px 10px 0px;
+}
+
+.topo{
+    padding-top: 20px !important;
+}
+
+.btn{
+  margin-bottom: 20px;
+  float: right;
+}
+
+// .submenu{
+//   padding: 30px;
+//   padding-top: 10px;
+// }
+
+.bordabaixo{
+  border-bottom: 1px solid black !important;
+}
+// .center{
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding-bottom: 5px;
+// }
+
+// table {
+//     border-collapse: collapse;
+//     margin: 10px;
+//     align-self: auto;
+//     font-size: 12px; 
+//     font-family: 'Chivo';
+//   }
+
+//   th {
+//     padding-left: 20px;
+//     padding-right: 20px;  
+//   }
+
+//   td {
+//     padding-left: 20px;
+//     padding-right: 20px;
+//     border-left: 1px solid #707070 !important;
+//     text-align: center;
+//   }
+//   td.primeiro, th.primeiro {
+//     border-left: 0px !important;
+//   }
+
+// .radiobtn{
+//   cursor: pointer;
+//   margin-top: -3px;
+//   padding-left: 20px;
+//   user-select: none;
+//   -moz-user-select: none;
+// }
+
+// label{
+//   font-weight: 200 !important;
+//   display:block;
+// }
+
+// #etapa{
+//   color: #333333 !important;
+// }
+
+
+.content{
+  padding-top: 0px;
+  padding-bottom: 50px;
+
+}
+
+// .btn{
+//   background-color: #ED1C24!important;
+//   color: #fff!important;
+//   text-align: center;
+//   margin-right: 50px;
+//   font-family: 'Chivo';
+//   width: 165px;
+//   height: 35px;
+//   padding: 9px 50px;
+//   border: none;
+// }
+
+.integra{
+  float: left;
+}

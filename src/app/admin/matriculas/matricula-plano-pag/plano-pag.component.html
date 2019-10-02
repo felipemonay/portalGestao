@@ -1,0 +1,54 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <app-etapa [pagina]="'planoPagamento'" [idMatricula]="idMatricula" [navega]="navega"></app-etapa>
+    </section>
+    <section class="content">
+        <form [formGroup]="f" novalidate>
+            <div class="content " *ngIf="(planos$ | async) as planos" >
+                <h3 class="bordabaixo">Etapa 8/9 - Selecione o plano de pagamento</h3>
+                <div class="card mb-3" *ngFor="let plano of planos | orderBy:'descricao';let i = index;" (click)="selecionaPlano(plano)">
+                    <div class="card-header font-weight-bold" >
+                        <input  type="radio" formControlName="plano" [value]="plano" [checked]="(plano.idprecificacao === planoEscolhido.idprecificacao)"/>
+                        {{ plano.descricao }}: de {{ plano.valorTotal | currency:'BRL':'symbol':'1.2-2' }} por {{ plano.valorTotalDesconto | currency:'BRL':'symbol':'1.2-2' }} ({{ plano.desconto | number:'1.1-1' }}% desconto)
+                    </div>
+                    <div  *ngIf="(planoEscolhido.idprecificacao === plano.idprecificacao)" >
+                        <div class="card-columns p-1 " style="column-count: 2">
+                            <div class="card p-0 m-0" *ngFor="let pagamento of plano.planosPagamento | orderBy:'tipoArrecadacao':'asc'">
+                                <div class="card-header" center>
+                                    <span>
+                                        {{ pagamento.tipoArrecadacao }} 
+                                    </span>
+                                    <span *ngIf="pagamento.descontoPlano">
+                                        com desconto: {{ pagamento.descontoPlano | number:'1.1-1'}} %
+                                    </span>
+                                </div>
+                                <div class="card-body" >
+                                    <div class="col-md-12 m-1">
+                                        <p  [ngStyle]="{'text-decoration': ((pagamento.descontoPlano)?'line-through':'none'),
+                                                        'font-size': ((pagamento.descontoPlano)?'smaller':'')}"  >                                            
+                                            <span>{{ pagamento.numeroParcelas }} parcela(s) de </span>
+                                            <span>{{ pagamento.valorParcela | currency:'BRL':'symbol':'1.2-2' }} = </span>
+                                            <span>{{ pagamento.valorTotal | currency:'BRL':'symbol':'1.2-2' }} </span>
+                                        </p>
+                                        <p *ngIf="(pagamento.descontoPlano)">
+                                            <span></span>
+                                            <span>{{ pagamento.numeroParcelas }} parcela(s) de </span>
+                                            <span>{{ pagamento.valorParcelaDesconto | currency:'BRL':'symbol':'1.2-2' }} </span>
+                                            <span>= {{ pagamento.valorTotalDesconto | currency:'BRL':'symbol':'1.2-2' }} </span>
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-prox" id="proximo-btn" name="proximo" type="submit" (click)="onSubmit()" [disabled]="(formStatus)">Próximo</button>
+            <button class="btn btn-prox" id="voltar-btn" name="voltar" type="submit" (click)="backClicked()">Voltar</button>                
+            <button class="btn btn-lg btn-outline-primary" (click)="open()" style="float:left;">Desconto</button>
+            <button class="btn integra" type="submit" (click)="integra('integra')" *ngIf="navega" [disabled]="(formStatus)">Atualizar</button>
+        </form>
+    </section>
+    <!-- <app-form-debug [form]="f"></app-form-debug> -->
+</div>

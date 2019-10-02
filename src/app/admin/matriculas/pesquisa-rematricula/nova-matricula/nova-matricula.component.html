@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+    <section class="content-header">
+    </section>
+    <section class="content">
+      <div class="card col-sm-12">
+        <form [formGroup]="f" novalidate>
+          <div class="cardHeader">
+            <h3>Nova Matricula</h3>
+          </div>
+          <div class="cardBody">
+            <div class="col-sm-12">
+              <div class="col-sm-4">
+                <label>Unidade</label>
+                <select formControlName="idUnidade" class="form-control" (change)="onChangeUnidade($event.target.value)" >
+                  <option value>Selecione...</option>
+                  <option *ngFor="let item of listaUnidades | orderBy:'idUnidade':'asc'" [value]="item.idUnidade">{{item.descricao}}</select>
+              </div>
+              <div class="col-sm-2">
+                  <label>Periodo Letivo</label>
+                  <select class="form-control" formControlName="idPeriodoLetivo" (change)="onChangePeriodoLetivo($event.target.value)" >
+                    <option value>Selecione...</option>
+                    <option *ngFor="let item of listaPeriodosLetivos | orderBy:'idPeriodoLetivo':'desc'" [value]="item.idPeriodoLetivo ">{{item.descricao}}</select>  
+              </div>
+              <div class="col-sm-4">
+                  <label>Curso</label>
+                  <select class="form-control" formControlName="idCurso" (change)="onChangeCurso($event.target.value)">
+                    <option value>Selecione...</option>
+                    <option *ngFor="let item of listaCursos" [value]="item.idCurso"> {{item.descricao}}</select>
+              </div>
+              <div class="col-sm-2">
+                <label>Serie</label>
+                <select formControlName="idSerie" class="form-control"  (change)="onChangeSerie($event.target.value)">
+                  <option value>Selecione...</option>
+                  <option *ngFor="let item of listaSeries" [value]="item.idSerie"> {{item.descricao}}</select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card" >
+        <div class="card-header hidden-xs">
+          <div class="row" style="margin:auto" >
+            <div class="col-sm-2">Turma</div>
+            <div class="col-sm-2">Data Inicial / Data Final</div>
+            <div class="col-sm-2">Capacidade</div>
+            <div class="col-sm-2">Vagas</div>
+            <div class="col-sm-2">Meta de Ocupação</div>
+            <div class="col-sm-2">Turno</div>
+          </div>
+        </div>
+        <div class="list-group" >
+          <div class="list-group-item" *ngIf="!listaTurmas.length">Selecione uma Série</div>
+          <div class="list-group-item" *ngFor="let item of listaTurmas" (click)="onSubmit(item.idTurma)" style="cursor: pointer;padding:10px;">
+              <div><i class="fas fa-user-plus fa-md" style="position: absolute;left: 20px;"></i></div>
+              <div class="col-sm-2 hidden-xs">{{ item.descricao }}</div>
+              <div class="col-sm-2 hidden-xs">{{ item.dataInicial }}/{{ item.dataFinal }}</div>
+              <div class="col-sm-2 hidden-xs">{{ item.capacidade }}</div>
+              <div class="col-sm-2 hidden-xs">{{ item.vagas }}</div>
+              <div class="col-sm-2 hidden-xs">{{ item.ocupacaoMeta }}</div>
+              <div class="col-sm-2 hidden-xs">{{ item.turno }}</div>
+              <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                  <span>
+                      {{ item.descricao }}
+                  </span>
+                  <br>
+                  <span>  
+                    <small>
+                      Periodo: {{ item.dataInicial }}/{{ item.dataFinal }}
+                      Capacidade {{ item.capacidade }}
+                    </small>
+                  </span>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- <app-form-debug [form]="f"></app-form-debug> -->
+    </section> 
+  </div>
